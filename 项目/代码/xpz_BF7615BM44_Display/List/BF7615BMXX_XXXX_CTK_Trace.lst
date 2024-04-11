@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/10/2024 19:57:35 PAGE 1   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/11/2024 12:54:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_CTK_TRACE
@@ -62,7 +62,7 @@ line level    source
                             
                             TraceMode_Master_Read_Data(&raw_data[0],&base_line[0],keys_flag_l_Tracemode,keys_flag_h_Tracemode);
               
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/10/2024 19:57:35 PAGE 2   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/11/2024 12:54:17 PAGE 2   
 
                             IICCON |= 0x04; 
                         }
@@ -126,7 +126,7 @@ line level    source
                       TRISE |= 0x20;//PE5设置为输入
                     
                       {REG_ADDR = 0x34;REG_DATA &= ~(0x10);REG_DATA |= (0x10&(iic_port<<4));}
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/10/2024 19:57:35 PAGE 3   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/11/2024 12:54:17 PAGE 3   
 
                   }
                   else
@@ -190,7 +190,7 @@ line level    source
                     {
                       
                       raw = *(p_rawData + DataNum);
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/10/2024 19:57:35 PAGE 4   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/11/2024 12:54:17 PAGE 4   
 
                       
                       
@@ -254,7 +254,7 @@ line level    source
                   }         
                   else if(ReadCnt == ((CH_MAX << 2) + 6))//触摸标志位bit7:0
                   {           
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/10/2024 19:57:35 PAGE 5   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/11/2024 12:54:17 PAGE 5   
 
                     tmp = (unsigned char )t_keysFlagSN; 
                   }
@@ -318,7 +318,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =   ----    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/10/2024 19:57:35 PAGE 6   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TRACE                                         04/11/2024 12:54:17 PAGE 6   
 
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----

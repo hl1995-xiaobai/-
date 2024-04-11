@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 1   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TOUCH_MCU_INIT
@@ -62,7 +62,7 @@ line level    source
   49          // ‰»Î≤Œ ˝£∫ us
   50          // ‰≥ˆ≤Œ ˝£∫ Œﬁ
   51          //∑µ ªÿ ÷µ£∫ Œﬁ
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 2   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 2   
 
   52          //-----------------------------------------------------------------//
   53          #if(DELAY_US_EN == 1)
@@ -126,7 +126,7 @@ line level    source
  111          
  112          #if ((DELAY_MS_EN == 1))
  113          
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 3   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 3   
 
  114          #pragma message "±‡“Î£¨void Delay_Ms(uint ms)∫Ø ˝"
 *** MESSAGE C286 IN LINE 114 OF BF7615BMXX_XXXX_Library\Touch_MCU_Init.c: ±‡“Î£¨void Delay_Ms(uint ms)∫Ø 
@@ -190,7 +190,7 @@ line level    source
  172   1              TRISE |= ((open_sns_l >> 4)  & 0xF0);
  173   1              TRISF |= ((open_sns_l >> 12) & 0xFF);
  174   1              TRISG |= ((open_sns_l >> 20) & 0x0F);
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 4   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 4   
 
  175   1              TRISH |= ((open_sns_l >> 24) & 0xFF);//…Ë÷√Œ™ ‰»Î
  176   1              
@@ -254,7 +254,7 @@ line level    source
  232   1          #endif
  233   1      
  234   1        #endif
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 5   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 5   
 
  235   1      
  236   1        #if (TRACEMODE == TRUE) 
@@ -318,7 +318,7 @@ line level    source
  294   1        #endif
  295   1      }
  296          
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 6   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 6   
 
  297          //-----------------------------------------------------------------//
  298          //∫Ø ˝√˚≥∆£∫ void Trace_Mode_Init(void)
@@ -382,7 +382,7 @@ line level    source
                   #endif
                 #endif
                 
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 7   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 7   
 
                 #ifdef IDLE_MODE
                   #if IDLE_MODE
@@ -446,7 +446,7 @@ line level    source
               
                 #ifdef LED_SWITCH_EN
                   #if LED_SWITCH_EN
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 8   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 8   
 
                     #if (LED_SER_ARR_EN == 1)
                       LED_SER_Init();//LED¥Æ––µ„’Û…®√Ë≥ı ºªØ
@@ -510,7 +510,7 @@ line level    source
                     #endif
                   #endif
  482   1          
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 9   
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 9   
 
  483   1          #ifdef UART1_EN
                     #if(UART1_EN == 1)
@@ -574,7 +574,7 @@ line level    source
  542   1          #endif
  543   1          
  544   1          #ifdef Timer2_EN
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 10  
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 10  
 
  545   1            #if Timer2_EN
  546   1              Timer2_Init(1,0);//∂® ±∆˜2≥ı ºªØ
@@ -638,7 +638,7 @@ line level    source
                         LED_ARR_Init();//LED––¡–µ„’Û…®√Ë≥ı ºªØ
                       #endif
                     #endif
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 11  
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 11  
 
                   #endif
  608   1          
@@ -702,7 +702,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/10/2024 19:57:35 PAGE 12  
+C51 COMPILER V9.60.7.0   TOUCH_MCU_INIT                                                    04/11/2024 12:54:17 PAGE 12  
 
    CODE SIZE        =    774    ----
    CONSTANT SIZE    =     42    ----

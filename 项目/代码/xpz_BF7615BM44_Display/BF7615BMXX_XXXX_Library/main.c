@@ -1,3 +1,5 @@
+#include "include.h"
+
 #include ".\BF7615BMXX_XXXX_Library\Config.h"
 
 void main(void)

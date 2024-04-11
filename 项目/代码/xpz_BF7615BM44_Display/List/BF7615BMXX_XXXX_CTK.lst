@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 1   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_CTK
@@ -62,7 +62,7 @@ line level    source
   51          
   52            #if UN_NORMAL_CHECK
                     unsigned char xdata un_normal_count = 0;
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 2   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 2   
 
                     unsigned char xdata un_normal_recover_count = 0;
                     bit un_normal_flag = 0;
@@ -126,7 +126,7 @@ line level    source
                         {
                           parallel_init_flag = 1;
                           base_line_parallel[0] = raw_data_parallel[0];           
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 3   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 3   
 
                           Set_Next_SNS();
                           return;
@@ -190,7 +190,7 @@ line level    source
                             adjust_count = 0;
                             parallel_init_flag = 1;
                             base_line_parallel[0] = raw_data_parallel[0];           
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 4   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 4   
 
                             Set_Next_SNS();
                             return;
@@ -254,7 +254,7 @@ line level    source
  237          //输出参数： 无
  238          //返 回 值： 无
  239          //-----------------------------------------------------------------// 
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 5   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 5   
 
  240          void Set_Next_SNS(void)
  241          {
@@ -318,7 +318,7 @@ line level    source
  299   4                      #if (CS_SW == 1)  
                                 cs_noise = Data_Deal(8,0,SNS_NUM); 
                                 Set_Next_SNS();
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 6   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 6   
 
                               #else
  303   4                      
@@ -382,7 +382,7 @@ line level    source
  360          //-----------------------------------------------------------------//
  361          
  362          void Base_Line_Init()
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 7   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 7   
 
  363          {   
  364   1          unsigned char xdata i;
@@ -446,7 +446,7 @@ line level    source
  422   1        {
  423   2          #if(LONG_KEY_COUNT != 0)
  424   2            if(long_key_clear_count >= LONG_KEY_COUNT)
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 8   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 8   
 
  425   2            {
  426   3              Base_Line_Init();
@@ -510,7 +510,7 @@ line level    source
                   
                     if(water_flow_flag == 1)
                     {
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 9   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 9   
 
                       if(sensor_open[addr] < 32)
                       {
@@ -574,7 +574,7 @@ line level    source
                       if(sensor_open[addr] < 32)
                       {
                         muli_key_flag_l &= ~((long)0x01 << sensor_open[addr]);  
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 10  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 10  
 
                       }
                       else
@@ -638,7 +638,7 @@ line level    source
                           
                         }
                       }
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 11  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 11  
 
                       else
                       {
@@ -702,7 +702,7 @@ line level    source
                         water_flow_left_count++;
                         if(water_flow_left_count >= WATER_FLOW_LEFT_MAX_COUNT)
                         {
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 12  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 12  
 
                           water_flow_flag = 0;
                           water_flow_left_count = 0;
@@ -766,7 +766,7 @@ line level    source
  732   5                    }
  733   4                    else
  734   4                    {
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 13  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 13  
 
  735   5                      if(KEYS_RENOVATE_FLAG_H &(((unsigned long)0x01)<<(sensor_open[addr]-32)))
  736   5                      {
@@ -830,7 +830,7 @@ line level    source
  794   2          else//differ<=p_noise基线更新
  795   2          {
  796   3              #if(RENOVATE_MODE == 0)//模式0基线更新
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 14  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 14  
 
  797   3              
  798   3                  over_p_noise_count[addr] = 0;
@@ -894,7 +894,7 @@ line level    source
  856   3          }
  857   2        }
  858   1        else//differ<0的情况
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 15  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 15  
 
  859   1        {
  860   2          
@@ -958,7 +958,7 @@ line level    source
                           }
                         }
                       
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 16  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 16  
 
                       #endif
  922   3          }
@@ -1022,7 +1022,7 @@ line level    source
                               }
                             }
                             #endif          
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 17  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 17  
 
                             
                           }
@@ -1086,7 +1086,7 @@ line level    source
                               }
                             }
                           #endif
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 18  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 18  
 
                           
                         } 
@@ -1150,7 +1150,7 @@ line level    source
 1104   3            touch_confirm_count[addr] = 0;  
 1105   3          }
 1106   2          else
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 19  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 19  
 
 1107   2          {
 1108   3              touch_confirm_count[addr]++;
@@ -1214,7 +1214,7 @@ line level    source
 1166          //函数功能：通道电流源自适应
 1167          //输入参数： 无
 1168          //输出参数： 无
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 20  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 20  
 
 1169          //返 回 值： 无
 1170          //-----------------------------------------------------------------//        
@@ -1278,7 +1278,7 @@ line level    source
 1228   4      
 1229   4                if(pull_i_value[sns_next] > (0))
 1230   4                {
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 21  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 21  
 
 1231   5                  pull_i_value[sns_next] -= (1);
 1232   5                  CTK_PULL_I_SET(pull_i_value[sns_next]);//设置级数
@@ -1342,7 +1342,7 @@ line level    source
 1290   6                      adjust_done_flag = 1;
 1291   6                    }
 1292   5                    Set_Next_SNS();
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/10/2024 19:57:35 PAGE 22  
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK                                               04/11/2024 12:54:17 PAGE 22  
 
 1293   5                    break;
 1294   5                }

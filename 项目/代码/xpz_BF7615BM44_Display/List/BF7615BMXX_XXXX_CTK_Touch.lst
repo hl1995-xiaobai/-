@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/10/2024 19:57:35 PAGE 1   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/11/2024 12:54:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_CTK_TOUCH
@@ -62,7 +62,7 @@ line level    source
                 #endif
   49          #endif
   50          //-----------------------------------------------------------------//
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/10/2024 19:57:35 PAGE 2   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/11/2024 12:54:17 PAGE 2   
 
   51          //函数名称： void BF7615BMXX_XXXXX_Set_Touch_Flag(void)
   52          //函数功能： 触摸判断并置位或者清除触摸标志位
@@ -126,7 +126,7 @@ line level    source
                                     keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
                                   
                                   }
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/10/2024 19:57:35 PAGE 3   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/11/2024 12:54:17 PAGE 3   
 
                                   else
                                   {
@@ -190,7 +190,7 @@ line level    source
                                 }
                               }
                               #endif
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/10/2024 19:57:35 PAGE 4   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/11/2024 12:54:17 PAGE 4   
 
                             #endif
                             
@@ -254,7 +254,7 @@ line level    source
                                   {
                                     if(keys_flag_l & ((long)0x01 << sensor_open[Sns_Count]))
                                     {
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/10/2024 19:57:35 PAGE 5   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/11/2024 12:54:17 PAGE 5   
 
                                       keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
                                     
@@ -318,7 +318,7 @@ line level    source
                                         keys_flag_h_Tracemode |= ((long)0x01 << (Sns_Count-32));
                                       }
                                       
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/10/2024 19:57:35 PAGE 6   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/11/2024 12:54:17 PAGE 6   
 
                                     }
                                     else
@@ -382,7 +382,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----
    XDATA CONST SIZE =   ----    ----
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/10/2024 19:57:35 PAGE 7   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/11/2024 12:54:17 PAGE 7   
 
    FAR CONST SIZE   =   ----    ----
 END OF MODULE INFORMATION.

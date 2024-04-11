@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/10/2024 19:57:35 PAGE 1   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/11/2024 12:54:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_CTK_IDLE
@@ -62,7 +62,7 @@ line level    source
              -6:1156ms,7:2304ms
                 //输出参数： 无
                 //返 回 值： 无
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/10/2024 19:57:35 PAGE 2   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/11/2024 12:54:17 PAGE 2   
 
                 //-----------------------------------------------------------------//
                 void Idle_Wake_Up_Init(uint _Step_In_Idle_Time,uint _Idle_Wake_Up_Time)
@@ -126,7 +126,7 @@ line level    source
                               }
                               Cnt_Par[0] = 0;
                               Cnt_Par[2] = 0;
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/10/2024 19:57:35 PAGE 3   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/11/2024 12:54:17 PAGE 3   
 
                               Cnt_Par[3] = 0;
                             
@@ -190,7 +190,7 @@ line level    source
                             
                             EA = 1; //开总中断
                             
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/10/2024 19:57:35 PAGE 4   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_IDLE                                          04/11/2024 12:54:17 PAGE 4   
 
                             PCON = 0x01;//进入省电模式等待唤醒
                             

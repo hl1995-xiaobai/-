@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 1   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_API_TIMER
@@ -62,7 +62,7 @@ line level    source
   51   1            if(ctk_soft_reset_count >= ctk_soft_reset_max_count)
   52   1            {
   53   2              ctk_soft_reset_count = 0;
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 2   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 2   
 
   54   2              SOFT_RST = 0x55;
   55   2            }
@@ -126,7 +126,7 @@ line level    source
              -ýÄ£Ê½£¬3£º8bit¶¨Ê±»ò¼ÆÊýºÍ8bit¶¨Ê±Ä£Ê½ tiemr0_clk=(1/12)*sys_clk
  111   1          
  112   1          TH0_Reload = (65536 - ((uint)((Timer0Us*1.0)*((SYS_CLK_FRE*1.0)/12.0))))>>8;
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 3   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 3   
 
  113   1          TL0_Reload = (65536 - ((uint)((Timer0Us*1.0)*((SYS_CLK_FRE*1.0)/12.0))));
  114   1          TH0 = TH0_Reload; 
@@ -190,7 +190,7 @@ line level    source
  172   1            Reset_Cnt_Add();
  173   1            if((keys_flag_l != 0)||(keys_flag_h != 0))
  174   1            {
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 4   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 4   
 
  175   2              long_key_clear_count++; 
  176   2            }
@@ -254,7 +254,7 @@ line level    source
  234   1          #endif
  235   1          
  236   1          #ifdef VolDet_EN        
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 5   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 5   
 
  237   1            #if(VolDet_EN == 1)
  238   1        
@@ -318,7 +318,7 @@ line level    source
  293          //-----------------------------------------------------------------//
  294          //º¯ÊýÃû³Æ£º void Timer1_ISR() interrupt 3
  295          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷1ÖÐ¶Ï×Óº¯Êý
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 6   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 6   
 
  296          //ÊäÈë²ÎÊý£º ÎÞ
  297          //Êä³ö²ÎÊý£º ÎÞ
@@ -382,7 +382,7 @@ line level    source
  352   1          T2_IE_SET;//¿ªÆôTimer2ÖÐ¶ÏÊ¹ÄÜ
  353   1          T2_RUN;//¿ªÆôTimer2
  354   1          EA = 1;//¿ª×ÜÖÐ¶Ï 
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 7   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 7   
 
  355   1        
  356   1        }
@@ -446,7 +446,7 @@ line level    source
               //-----------------------------------------------------------------//
               //º¯ÊýÃû³Æ£º void Timer3_ISR() interrupt 19
               //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷1ÖÐ¶Ï×Óº¯Êý
-C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/10/2024 19:57:35 PAGE 8   
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/11/2024 12:54:17 PAGE 8   
 
               //ÊäÈë²ÎÊý£º ÎÞ
               //Êä³ö²ÎÊý£º ÎÞ
