@@ -4,6 +4,8 @@
 volatile SYS_HARDWARE_T g_SysHardware;   	// 全局变量，存储系统硬件信息，易变的，可能会被中断或其他线程修改
 volatile SYS_TIME_CNT_T g_sysTimeCnt;    	// 全局变量，存储系统时间计数器信息，易变的，可能会被中断或其他线程修改
 volatile VIEW_T g_View;                  	// 全局变量，存储视图信息，易变的，可能会被中断或其他线程修改
+xdata const PSM16106_T pSM16106 = (PSM16106_T)(&r_SM16106);
+volatile DISPLAY_LED_T  		g_DisplayLed;
 volatile CONFIG_T g_config;               	// 全局变量，存储配置信息，易变的，可能会被中断或其他线程修改
 
 

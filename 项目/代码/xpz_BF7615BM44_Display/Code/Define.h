@@ -3,13 +3,21 @@
 
 
 // 定义通用类型别名
-#define  	uchar 	unsigned char
-#define 	uint8	unsigned char
-#define 	uint16	unsigned int
-#define 	uint32	unsigned long
+#define  	uchar 		unsigned char
+#define 	uint8		unsigned char
+#define 	uint16		unsigned int
+#define 	uint32		unsigned long
+#define 	int32		signed long
 
-#define 	int8	signed char
-#define 	int16	signed int
+
+#define 	int8		signed char
+#define 	int16		signed int
+
+#define 	uint8_t	 	unsigned char
+#define 	uint16_t 	unsigned int
+#define 	uint32_t 	unsigned long
+
+#define     int64_t		long long
 
 
 // 定义常用宏

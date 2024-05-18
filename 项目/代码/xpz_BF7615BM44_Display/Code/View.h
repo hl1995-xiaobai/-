@@ -4,6 +4,11 @@
 //#include "SteamOvenView.h"
 //#include "RangeHoodView.h"
 
+#define HOST_FIRMWARE_VERSION_NUMBER		0x10	/*（上位机固件版本号）V1.0*/
+
+#define NUM_AREAS 16  // 假设有16个区域
+
+
 #define SET_MODE_AUTO_END_TIME   			5  		/*设置模式自动结束时间（秒）*/
 #define BRIGHT_AUTO_END_TIME     			180  	/*照明自动结束时间（秒）*/
 #define AUTO_DOOR_LOCK_CNT					3     	/*门锁自动上锁倒计时(秒)*/
@@ -32,6 +37,32 @@
 #define STEAM_OVEN_FUNCTION_UNFREEZE_PREHEATTIME         1200
 #define STEAM_OVEN_FUNCTION_DISINFECT_PREHEATTIME        1200
 #define STEAM_OVEN_FUNCTION_DRY_PREHEATTIME              1200
+
+
+
+#define AREA_POWER							0     /*电源区域*/
+#define AREA_DOOR							1     /*开门区域*/
+#define AREA_A								2     /*A 区域*/
+#define AREA_B								3     /*B 区域*/
+#define AREA_C								4     /*C 区域*/
+#define AREA_D								5     /*D 区域*/
+#define AREA_E								6     /*E 区域*/
+#define AREA_DRAIN							7     /*排水 区域*/
+#define AREA_MENU							8     /*菜单设置 区域*/
+#define AREA_NUM1							9     /*数字1 区域*/
+#define AREA_NUM2							10     /*数字2 区域*/
+#define AREA_UP								11     /*上 区域*/
+#define AREA_DOWN							12     /*下 区域*/
+#define AREA_HEAT							13     /*加热 区域*/
+#define AREA_PLAY							14     /*启动 区域*/
+#define AREA_HAND							15     /*手势 区域*/
+
+
+
+
+#define LED_QL								2     /*全亮*/
+#define LED_BL								1     /*半亮*/
+#define LED_NULL							0     /*不亮*/
 
 
 
@@ -97,12 +128,17 @@
 typedef struct{
 	uint8 sysInit 		:1;		// 系统初始化标志位
 	uint8 SysMode 		:2;		// 系统模式
+	
+	uint8 SysTime100us	:1;		//
+	
 	uint8 SysTime1ms	:1;		// 1毫秒系统时间标志位
 	uint8 SysTime10ms	:1;		// 10毫秒系统时间标志位
 	uint8 SysTime20ms 	:1;		// 20毫秒系统时间标志位
 	uint8 SysTime100ms 	:1;		// 100毫秒系统时间标志位
+	
 	uint8 SysTime500ms 	:1;		// 500毫秒系统时间标志位
 	uint8 SysTime1S 	:1;		// 1秒系统时间标志位
+	uint8 				:6;		//
 
 	uint8 VersionYear	:8;		// 软件版本年
 	uint8 VersionMonth	:8;		// 软件版本月
@@ -114,12 +150,19 @@ typedef struct{
 
 	uint8 TestCnt;				// 测试计数器
 	uint8 TestType;				// 测试类型
+
+	uint8 Time_4ms_cnt;
+	uint8 Time_20ms_cnt;
+	uint8 Time_100ms_cnt;
+	uint16 Time_500ms_cnt;
+	uint16 Time_1000ms_cnt;
 }xdata SYS_HARDWARE_T;
 
 // 定义系统时间计数器结构体
 typedef struct{
 	uint8 Time0TL0;				// 定时器0低8位
 	uint8 Time0TH0;				// 定时器0高8位
+	uint8 sysTime100usCnt;
 	uint8 sysTime10msCnt;		// 10毫秒系统时间计数器
 	uint8 sysTime20msCnt;		// 20毫秒系统时间计数器
 	uint8 sysTime100msCnt	:4;	// 100毫秒系统时间计数器
@@ -137,6 +180,7 @@ typedef struct{
 	uint8 VersionYearP;						// 软件版本年
 	uint8 VersionMonthP;					// 软件版本月
 	uint8 VersionDayP;						// 软件版本日
+	uint8 VersionNumber;					// 上位机固件版本号
 	uint8 TemperShowCnt;					// 温度显示区计数
 
 	uint8 PowerOn			:1;				// 电源
@@ -167,10 +211,101 @@ typedef struct{
 
 	uint8 SendingState;						// 发送状态
 
+	uint8 CurrentArea;  					// 当前LED区域控制
+
+	uint8 BrightnessTime[NUM_AREAS];
+
+	uint8 packet_id_query_device_status;
+
+	uint8 CommandIntervalPeriod;
+
+	uint8 QueryDeviceStatusTransmissionFlag					: 1;	/*查询设备状态*/
+	uint8 SendWashDataTransmissionFlag						: 1;	/*标准洗涤*/
+	uint8 SendFunctionTestTransmissionFlag					: 1;	/*维保功能测试*/	
+	uint8 ErrorInformationReportingTransmissionFlag			: 1;	/*错误信息上报*/
+	
+	uint8 SendFunctionSettingTransmissionFlag				: 1;	/*功能设定*/
+	uint8 SendParameterCalibrationTransmissionFlag			: 1;	/*参数校准*/
+	uint8 SendDryingDataTransmissionFlag					: 1;	/*烘干*/
+	uint8 													: 1;
+
 	// STEAM_OVEN_VIEW_T SteamOven;
 	// RANGE_HOOD_VIEW_T RangeHood;
 	// RANGE_HOOD_RECV_T RangeHoodRead;
 }xdata VIEW_T,*PVIEW_T;
+
+
+typedef struct{	
+	
+	uint16 LED_OUT0 		:1;
+	uint16 LED_OUT1			:1;
+	uint16 LED_OUT2			:1;
+	uint16 LED_OUT3			:1;
+	uint16 LED_OUT4			:1;
+	uint16 LED_OUT5			:1;
+	uint16 LED_OUT6			:1;
+	uint16 LED_OUT7			:1;
+
+	uint16 LED_OUT8			:1;
+	uint16 LED_OUT9			:1;
+	uint16 LED_OUT10		:1;
+	uint16 LED_OUT11		:1;
+
+	uint16 					:4;
+	
+}xdata SM16106_T,*PSM16106_T;
+
+
+typedef union{
+//	uint8 BrightnessTime[NUM_AREAS];
+//    uint8 CurrentArea;  // 当前LED区域控制
+
+	uint8 v[5];
+	struct{
+		uint8 	key_power_led 		:1;
+		uint8 	key_door_led 		:1;
+		uint8 	key_A_led 			:1;
+		uint8 	key_B_led 			:1;
+		uint8 	key_C_led 			:1;
+		uint8 	key_D_led 			:1;
+		uint8 	key_E_led 			:1;
+		uint8 	key_drain_led 		:1;
+
+		uint8 	key_menu_led 		:1;
+		uint8 	key_up_led 			:1;
+		uint8  	key_down_led		:1;
+		uint8 	key_heat_led		:1;
+		uint8 	key_play_led 		:1;
+		uint8 	hand_left_led 		:1;
+		uint8 	hand_right_led 		:1;
+		uint8 		 				:1;
+
+		uint8 	process_led 		:1;
+		uint8  	time_led			:1;		
+		uint8 		 				:6;
+
+		uint8 	num1_A_led 			:1;
+		uint8 	num1_F_led 			:1;
+		uint8 	num1_B_led 			:1;
+		uint8 	num1_G_led 			:1;
+		uint8 	num1_E_led 			:1;
+		uint8 	num1_C_led 			:1;
+		uint8 	num1_D_led 			:1;
+		uint8 	point_led			:1;
+
+		uint8 	num2_A_led 			:1;
+		uint8 	num2_F_led 			:1;
+		uint8 	num2_B_led 			:1;
+		uint8 	num2_G_led 			:1;
+		uint8 	num2_E_led 			:1;
+		uint8 	num2_C_led 			:1;
+		uint8 	num2_D_led 			:1;
+		uint8 	temper_led			:1;
+	
+	}v_f;
+	
+}xdata DISPLAY_LED_T;
+
 
 // 定义配置信息结构体
 typedef struct{
@@ -210,6 +345,8 @@ typedef struct{
 extern volatile SYS_HARDWARE_T 		g_SysHardware;
 extern volatile SYS_TIME_CNT_T 		g_sysTimeCnt;
 extern volatile VIEW_T g_View;
+extern xdata const PSM16106_T pSM16106;
+extern volatile DISPLAY_LED_T  		g_DisplayLed;
 extern volatile CONFIG_T 			g_config;
 
 

@@ -4,6 +4,12 @@
 
 void SysTimeInit(void);
 
+void Time_Basic(void);
+
+
+void SysTime100us(void);
+
+
 void SysTime1ms(void);
 
 void SysTime10msPool();

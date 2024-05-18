@@ -10,6 +10,7 @@
 #include <assert.h>   							// 断言
 #include <errno.h>    							// 错误码
 
+
 // 包含自定义头文件
 #include ".\BF7615BMXX_XXXX_Library\Config.h"   // BF7615BMXX_XXXX 配置头文件
 
@@ -18,6 +19,20 @@
 #include "view.h"     						    // 视图头文件
 
 #include "SysTime.h"  						    // 系统时间头文件
+
+#include "crc.h"
+
+#include "SM16306SJ.h"
+
+#include "Key_Function.h"
+
+#include "Led.h"
+
+#include "Display_Function.h"
+
+#include "Cmd.h"
+
+
 
 #endif  
 

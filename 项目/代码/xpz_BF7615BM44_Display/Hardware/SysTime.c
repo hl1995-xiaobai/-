@@ -13,10 +13,33 @@ void SysTimeInit(void){
 	 
 }
 
+void Time_Basic(void) //Interrupt-0-250us
+{
+	if(g_SysHardware.Time_4ms_cnt)	g_SysHardware.Time_4ms_cnt--;
+	if(g_SysHardware.Time_20ms_cnt) 	g_SysHardware.Time_20ms_cnt--;
+	if(g_SysHardware.Time_100ms_cnt) 	g_SysHardware.Time_100ms_cnt--;
+	if(g_SysHardware.Time_500ms_cnt) 	g_SysHardware.Time_500ms_cnt--;
+	if(g_SysHardware.Time_1000ms_cnt) g_SysHardware.Time_1000ms_cnt--;
+}
+
+
+
+void SysTime100us(void){
+
+	
+	g_sysTimeCnt.sysTime100usCnt++;
+
+	if(g_sysTimeCnt.sysTime100usCnt >= 10){
+		g_SysHardware.SysTime1ms = SET;
+		g_sysTimeCnt.sysTime100usCnt = 0;
+		g_SysHardware.SysTime1ms = SET;
+	}
+}
+
 
 void SysTime1ms(void){
 
-	g_SysHardware.SysTime1ms = SET;
+//	g_SysHardware.SysTime1ms = SET;
 
 	g_sysTimeCnt.sysTime10msCnt++;
 	if(g_sysTimeCnt.sysTime10msCnt >= 10 ){

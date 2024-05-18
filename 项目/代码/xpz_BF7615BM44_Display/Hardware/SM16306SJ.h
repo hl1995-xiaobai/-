@@ -5,16 +5,31 @@
 
 #define NOP_TIM				1
 
-#define SM16xx_SDI 			PB5
-#define SM16xx_CLK			PB4
-#define SM16xx_LE			PB3
-#define SM16xx_OE			PB6
+#define SM16xx_SDI 			PG1			//LED_DI
+#define SM16xx_CLK			PG0			//LED_DCK
+#define SM16xx_LE			PF5			//LED_LAT
+#define SM16xx_OE			PE2			//GCLK
 
 // LED_COM
-#define Port_COM1			PE6
-#define	Port_COM2			PE7
-#define Port_COM3			PG0
-#define Port_COM4			PG1
+#define Port_COM1			PH2
+#define	Port_COM2			PH1
+
+#define Port_SW1			PB5
+#define	Port_SW2			PB4
+#define Port_SW3			PB3
+#define	Port_SW4			PB2
+#define Port_SW5			PB1
+#define	Port_SW6			PB0
+#define Port_SW7			PA1
+#define	Port_SW8			PA0
+#define	Port_SW9			PH0
+#define Port_SW10			PG3
+#define	Port_SW11			PG2
+#define Port_SW12			PE7
+#define	Port_SW13			PE6
+#define	Port_HandMove		PE1
+
+
 
 #define DISPLAY_BUFFER_SIZE 1
 

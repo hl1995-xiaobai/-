@@ -9,7 +9,7 @@
 //#include "View.h"
 
 
-#define NOP_TIM 1
+
 
 unsigned char idata SM16xx_Dat[6];
 unsigned char idata SM16xx_DatRs[6];
@@ -65,35 +65,73 @@ void SM16xx_Init(void) {
 	
 	memset(pSM16106, 0, sizeof(SM16106_T));
 	
-	SET_PB3_IO_OUT;
-	SET_PB6_IO_OUT;
-	SET_PB4_IO_OUT;
-	SET_PB5_IO_OUT;
+	SET_PF5_IO_OUT;
+	SET_PE2_IO_OUT;
+	SET_PG0_IO_OUT;
+	SET_PG1_IO_OUT;
 	
 	SM16xx_LE = 0;
 	SM16xx_OE = 0;
 	SM16xx_CLK = 0;
 	SM16xx_SDI = 0;
-	
-	SET_PE6_IO_OUT;
+
+	SET_PH2_IO_OUT;
+	SET_PH1_IO_OUT;
+	SET_PB5_IO_OUT;
+	SET_PB4_IO_OUT;
+	SET_PB3_IO_OUT;
+	SET_PB2_IO_OUT;
+	SET_PB1_IO_OUT;
+	SET_PB0_IO_OUT;
+	SET_PA1_IO_OUT;
+	SET_PA0_IO_OUT;
+	SET_PH0_IO_OUT;
+	SET_PG3_IO_OUT;
+	SET_PG2_IO_OUT;
 	SET_PE7_IO_OUT;
-	SET_PG0_IO_OUT;
-	SET_PG1_IO_OUT;
+	SET_PE6_IO_OUT;
+	SET_PE1_IO_OUT;
 
-#if(0)			
-	Port_COM1 = 1;
-	Port_COM2 = 1;
-	Port_COM3 = 1;
-	Port_COM4 = 1;
-#endif
-
-#if(1)
+#if(0)	
 	Port_COM1 = 0;
 	Port_COM2 = 0;
-	Port_COM3 = 0;
-	Port_COM4 = 0;
+
+	Port_SW1 = 0;			
+	Port_SW2 = 0;		
+	Port_SW3 = 0;		
+	Port_SW4 = 0;			
+	Port_SW5 = 0;			
+	Port_SW6 = 0;			
+	Port_SW7 = 0;		
+	Port_SW8 = 0;		
+	Port_SW9 = 0;		
+	Port_SW10 = 0;			
+	Port_SW11 = 0;
+	Port_SW12 = 0;			
+	Port_SW13 = 0;
+#endif
+
+
+#if(1)
+	Port_COM1 = 1;
+	Port_COM2 = 1;
+
+	Port_SW1 = 1;			
+	Port_SW2 = 1;		
+	Port_SW3 = 1;		
+	Port_SW4 = 1;			
+	Port_SW5 = 1;			
+	Port_SW6 = 1;			
+	Port_SW7 = 1;		
+	Port_SW8 = 1;		
+	Port_SW9 = 1;		
+	Port_SW10 = 1;			
+	Port_SW11 = 1;
+	Port_SW12 = 1;			
+	Port_SW13 = 1;
+	Port_HandMove = 1;
 #endif	
-	
+
 }
 
 
@@ -103,9 +141,9 @@ void SM16xx_WriteAll(void){
 		SM16xx_OE = 1;
 		SM16xx_LE = 1;
 
-//		SM16xx_WriteOneByte(r_SM16106);
+		SM16xx_WriteOneByte(r_SM16106);
 
-		SM16xx_WriteOneByte(0xFFFF);
+//		SM16xx_WriteOneByte(0xFFFF);
 		
 		SM16xx_LE = 0;
 			
