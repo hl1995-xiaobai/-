@@ -1,0 +1,88 @@
+C51 COMPILER V9.60.7.0   DISPLAY_FUNCTION                                                  04/23/2024 20:16:29 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DISPLAY_FUNCTION
+OBJECT MODULE PLACED IN .\Output\Display_Function.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Hardware\Display_Function.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.
+                    -\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\Display_Function.lst) TAB
+                    -S(2) OBJECT(.\Output\Display_Function.obj)
+
+line level    source
+
+   1          #include "include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\ÏîÄ¿\´úÂë\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          
+   3          #include "Display_Function.h"
+   4          
+   5          
+   6          void DisplayKeyLed(void){
+   7   1        
+   8   1      
+   9   1        memset(&g_DisplayLed, 0, sizeof(DISPLAY_LED_T));
+  10   1        
+  11   1      #if(0)
+                if(g_View.BrightnessTime[0] == 1){
+                  g_DisplayLed.v_f.key_power_led = CLE;
+                }else if(g_View.BrightnessTime[0] == 0){
+                  g_DisplayLed.v_f.key_power_led = SET;
+                }
+              #endif
+  18   1      
+  19   1      #if(0)
+              
+                g_DisplayLed.v_f.key_power_led = SET;
+              
+                g_DisplayLed.v_f.key_door_led = SET;
+              
+                g_DisplayLed.v_f.key_A_led = SET;
+              
+                g_DisplayLed.v_f.key_B_led = SET;
+              
+                g_DisplayLed.v_f.key_C_led = SET;
+              
+                g_DisplayLed.v_f.key_D_led = SET;
+              
+                g_DisplayLed.v_f.key_E_led = SET;
+              
+                g_DisplayLed.v_f.key_drain_led = SET;
+              
+                g_DisplayLed.v_f.key_menu_led = SET;
+              
+                g_DisplayLed.v_f.num1_A_led = SET;
+              
+                g_DisplayLed.v_f.point_led = SET;
+              
+                g_DisplayLed.v_f.num2_A_led = SET;
+              
+                g_DisplayLed.v_f.temper_led = SET;
+              
+                g_DisplayLed.v_f.key_up_led = SET;
+              
+                g_DisplayLed.v_f.key_down_led = SET;
+              
+                g_DisplayLed.v_f.key_heat_led = SET;
+              
+C51 COMPILER V9.60.7.0   DISPLAY_FUNCTION                                                  04/23/2024 20:16:29 PAGE 2   
+
+                g_DisplayLed.v_f.key_play_led = SET;
+              
+                g_DisplayLed.v_f.hand_left_led = SET;
+              
+                g_DisplayLed.v_f.hand_right_led = SET;
+              
+              #endif
+  60   1      
+  61   1      
+  62   1      
+  63   1      }  
+  64          
+  65          
+  66          
+  67          
+  68          
+  69          
+  70          
+  71          
+  72          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

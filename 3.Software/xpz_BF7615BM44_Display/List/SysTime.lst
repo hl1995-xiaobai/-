@@ -1,0 +1,100 @@
+C51 COMPILER V9.60.7.0   SYSTIME                                                           04/23/2024 20:16:29 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SYSTIME
+OBJECT MODULE PLACED IN .\Output\SysTime.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Hardware\SysTime.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Applicat
+                    -ion_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\SysTime.lst) TABS(2) OBJECT(.\Outp
+                    -ut\SysTime.obj)
+
+line level    source
+
+   1          #include "include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\ÏîÄ¿\´úÂë\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          
+   3          #include "SysTime.h"
+   4          
+   5          
+   6          
+   7          void SysTimeInit(void){
+   8   1      
+   9   1        memset((void*)&g_sysTimeCnt,0, sizeof(SYS_TIME_CNT_T));
+  10   1      
+  11   1        g_SysHardware.SysTimeHour = 12;
+  12   1        
+  13   1         
+  14   1      }
+  15          
+  16          void Time_Basic(void) //Interrupt-0-250us
+  17          {
+  18   1        if(g_SysHardware.Time_4ms_cnt)  g_SysHardware.Time_4ms_cnt--;
+  19   1        if(g_SysHardware.Time_20ms_cnt)   g_SysHardware.Time_20ms_cnt--;
+  20   1        if(g_SysHardware.Time_100ms_cnt)  g_SysHardware.Time_100ms_cnt--;
+  21   1        if(g_SysHardware.Time_500ms_cnt)  g_SysHardware.Time_500ms_cnt--;
+  22   1        if(g_SysHardware.Time_1000ms_cnt) g_SysHardware.Time_1000ms_cnt--;
+  23   1      }
+  24          
+  25          
+  26          
+  27          void SysTime100us(void){
+  28   1      
+  29   1        
+  30   1        g_sysTimeCnt.sysTime100usCnt++;
+  31   1      
+  32   1        if(g_sysTimeCnt.sysTime100usCnt >= 10){
+  33   2          g_SysHardware.SysTime1ms = SET;
+  34   2          g_sysTimeCnt.sysTime100usCnt = 0;
+  35   2          g_SysHardware.SysTime1ms = SET;
+  36   2        }
+  37   1      }
+  38          
+  39          
+  40          void SysTime1ms(void){
+  41   1      
+  42   1      //  g_SysHardware.SysTime1ms = SET;
+  43   1      
+  44   1        g_sysTimeCnt.sysTime10msCnt++;
+  45   1        if(g_sysTimeCnt.sysTime10msCnt >= 10 ){
+  46   2          g_sysTimeCnt.sysTime10msCnt = 0;
+  47   2          g_SysHardware.SysTime10ms = SET;
+  48   2        }
+  49   1        
+  50   1      }
+  51          
+  52          void SysTime10msPool(){
+C51 COMPILER V9.60.7.0   SYSTIME                                                           04/23/2024 20:16:29 PAGE 2   
+
+  53   1        g_sysTimeCnt.sysTime20msCnt++;
+  54   1        if(g_sysTimeCnt.sysTime20msCnt >= 2 ){
+  55   2          g_sysTimeCnt.sysTime20msCnt = 0;
+  56   2          g_SysHardware.SysTime20ms = SET;
+  57   2        }
+  58   1      }
+  59          
+  60          
+  61          void SysTime20msPool(){
+  62   1        g_sysTimeCnt.sysTime100msCnt++;
+  63   1        if(g_sysTimeCnt.sysTime100msCnt >= 5 ){
+  64   2          g_sysTimeCnt.sysTime100msCnt = 0;
+  65   2          g_SysHardware.SysTime100ms = SET;
+  66   2        }
+  67   1      }
+  68          
+  69          void SysTime100msPool(){
+  70   1        g_sysTimeCnt.sysTime500msCnt++;
+  71   1        if(g_sysTimeCnt.sysTime500msCnt >= 5 ){
+  72   2          g_sysTimeCnt.sysTime500msCnt = 0;
+  73   2          g_SysHardware.SysTime500ms = SET;
+  74   2        }
+  75   1      }
+  76          
+  77          void SysTime500msPool(){
+  78   1        g_sysTimeCnt.sysTime1sCnt++;
+  79   1        if(g_sysTimeCnt.sysTime1sCnt >= 2 ){
+  80   2          g_sysTimeCnt.sysTime1sCnt = 0;
+  81   2          g_SysHardware.SysTime1S = SET;
+  82   2        }
+  83   1      }
+  84          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

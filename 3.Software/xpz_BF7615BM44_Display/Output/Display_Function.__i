@@ -1,0 +1,1 @@
+"Hardware\Display_Function.c" LARGE OMF2 OPTIMIZE (3,SPEED) BROWSE INCDIR(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\Display_Function.lst) TABS (2) OBJECT(.\Output\Display_Function.obj)

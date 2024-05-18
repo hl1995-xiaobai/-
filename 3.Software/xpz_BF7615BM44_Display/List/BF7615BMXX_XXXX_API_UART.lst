@@ -1,0 +1,468 @@
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_API_UART
+OBJECT MODULE PLACED IN .\Output\BF7615BMXX_XXXX_API_UART.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_API_Lib\BF7615BMXX_XXXX_API_UART
+                    -.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardwar
+                    -e) DEBUG PRINT(.\List\BF7615BMXX_XXXX_API_UART.lst) TABS(2) OBJECT(.\Output\BF7615BMXX_XXXX_API_UART.obj)
+
+line level    source
+
+   1          #include "include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\ÏîÄ¿\´úÂë\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          
+   3          #include ".\BF7615BMXX_XXXX_Library\Config.h"
+   4          
+   5          #if ((UART0_EN == 1)||(UART1_EN == 1))  
+   6          /****************************************************************/
+   7          //º¯ÊýÃû£ºuchar UART_Rece_Check(uchar n,uchar *nSendByte)  
+   8          //¹¦  ÄÜ£ºUART½ÓËÍÐ£Ñé
+   9          //²Î  Êý£ºuchar n:½ÓËÍÐ£Ñé×Ö½ÚÊý£»uchar *nSendByte£º·¢ËÍÊý¾ÝÖ¸Õë
+  10          //·µ»ØÖµ£ºuchar ·µ»ØÐ£ÑéÖµ
+  11          /****************************************************************/
+  12          
+  13          uchar UART_Rece_Check(uchar n,uchar *nCheckByte1,uchar *nCheckByte2)  
+  14          {
+  15   1          uchar i = 0;
+  16   1          for(i = 0; i < n; i++)
+  17   1          {
+  18   2            if((*(nCheckByte1 + i)) != (*(nCheckByte2 + i)))
+  19   2            {
+  20   3                return 1;
+  21   3            }
+  22   2          } 
+  23   1          return 0;
+  24   1      }
+  25          #endif
+  26          
+  27          #if UART0_EN
+  28          #pragma message "±àÒë,UART0¹¦ÄÜ"
+*** MESSAGE C286 IN LINE 28 OF BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_API_Lib\BF7615BMXX_XXXX_API_UART.c: ±àÒë,UART0¹¦Ä
+             -Ü
+  29          /****************************************************************/
+  30          //º¯ÊýÃû£ºvoid UART0_Send_NByte(uchar n,uchar *nSendByte)  
+  31          //¹¦  ÄÜ£ºUART0·¢ËÍN BYTES
+  32          //²Î  Êý£ºuchar n:·¢ËÍ×Ö½ÚÊý£»uchar *nSendByte£º·¢ËÍÊý¾ÝÖ¸Õë
+  33          //·µ»ØÖµ£ºÎÞ
+  34          /****************************************************************/
+  35          
+  36          //void UART0_Send_NByte(uchar n,uchar *nSendByte)  
+  37          //{
+  38          //    uchar i = 0;
+  39          //    for(i = 0; i < n; i++)
+  40          //    {
+  41          //      UART0_Send_Byte(*(nSendByte + i));
+  42          //    }   
+  43          //}
+  44          #endif  
+  45          
+  46          #if UART1_EN
+  47          #pragma message "±àÒë,UART1¹¦ÄÜ"
+*** MESSAGE C286 IN LINE 47 OF BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_API_Lib\BF7615BMXX_XXXX_API_UART.c: ±àÒë,UART1¹¦Ä
+             -Ü
+  48          /****************************************************************/
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 2   
+
+  49          //º¯ÊýÃû£ºvoid UART1_Send_NByte(uchar n,uchar *nSendByte)  
+  50          //¹¦  ÄÜ£ºUART1·¢ËÍN BYTES
+  51          //²Î  Êý£ºuchar n:·¢ËÍ×Ö½ÚÊý£»uchar *nSendByte£º·¢ËÍÊý¾ÝÖ¸Õë
+  52          //·µ»ØÖµ£ºÎÞ
+  53          /****************************************************************/
+  54          
+  55          //void UART1_Send_NByte(uchar n,uchar *nSendByte)  
+  56          //{
+  57          //    uchar i = 0;
+  58          //    for(i = 0; i < n; i++)
+  59          //    {
+  60          //      UART1_Send_Byte(*(nSendByte + i));
+  61          //    }   
+  62          //}
+  63          #endif
+  64          
+  65          
+  66          #if (UART0_EN == 1)
+  67          
+  68            
+  69          
+  70            
+  71            //-----------------------------------------------------------------//
+  72            //º¯ÊýÃû³Æ£º void UART0_Init(void)  
+  73            //º¯Êý¹¦ÄÜ£º UART0³õÊ¼»¯
+  74            //ÊäÈë²ÎÊý£º ÎÞ
+  75            //Êä³ö²ÎÊý£º ÎÞ
+  76            //·µ »Ø Öµ£º ÎÞ
+  77            //-----------------------------------------------------------------//
+  78            void UART0_Init(void) 
+  79            { 
+  80   1            EA = 0;//¹Ø×ÜÖÐ¶Ï£»
+  81   1            UART0_IP_SET;//ÉèÖÃUART0ÖÐ¶ÏÓÅ¼¶Îª¸ß£¬¸ù¾ÝÊµ¼ÊÓ¦ÔËÉèÖÃÓÅÏÈ¼¶
+  82   1            UART0_INT_FLAG_CLR;//Çå³ýUART0ÖÐ¶Ï±êÖ¾
+  83   1            UART0_PORT_SET(UART0_PORT);//UART_PC(RXD0C-TXD0C)Ó³ÉäÎªPC4/5Îª´®¿Ú£¬UART_PE(RXD0A-TXD0A)ÉäÎªPE4/5Îª´®¿Ú
+             -£¬UART_PF(RXD0B-TXD0B)ÉäÎªPF4/5Îª´®¿Ú
+  84   1            
+  85   1          #if (UART0_PORT == UART0_PC)
+                    REG_ADDR = 0x19;REG_DATA |= 0x10;//PC4¿ªÆôÉÏÀ­
+                    REG_ADDR = 0x19;REG_DATA |= 0x20;//PC5¿ªÆôÉÏÀ­
+                    
+                    REG_ADDR = 0x26;REG_DATA &= ~0x40;TRISC |= 0x10;//PC4ÉèÖÃRXD0ÎªÊäÈë
+                    REG_ADDR = 0x26;REG_DATA &= ~0x80;TRISC &= ~0x20;//PC5ÉèÖÃTXD0ÎªÊä³ö
+                  #elif(UART0_PORT == UART0_PE)
+  92   1      
+  93   1            REG_ADDR = 0x1B;REG_DATA |= 0x10;//PE4¿ªÆôÉÏÀ­
+  94   1            REG_ADDR = 0x1B;REG_DATA |= 0x20;//PE5¿ªÆôÉÏÀ­
+  95   1            REG_ADDR = 0x27;REG_DATA &= ~0x01;TRISE |= 0x10;//PE4ÉèÖÃRXD0ÎªÊäÈë
+  96   1            REG_ADDR = 0x27;REG_DATA &= ~0x02;TRISE &= ~0x20;//PE5ÉèÖÃTXD0ÎªÊä³ö
+  97   1            
+  98   1          #elif(UART0_PORT == UART0_PF)
+                    REG_ADDR = 0x1C;REG_DATA |= 0x10;//PF4¿ªÆôÉÏÀ­
+                    REG_ADDR = 0x1C;REG_DATA |= 0x20;//PF5¿ªÆôÉÏÀ­
+                    REG_ADDR = 0x28;REG_DATA &= ~0x01;TRISF |= 0x10;//PF4ÉèÖÃRXD0ÎªÊäÈë
+                    REG_ADDR = 0x28;REG_DATA &= ~0x02;TRISF &= ~0x20;//PF5ÉèÖÃTXD0ÎªÊä³ö
+                  #else
+              
+                  #endif
+ 106   1      
+ 107   1          UART0_BDL = (uchar)M_HEX_OF_BR(UART0_CFG_BAUD_RATE);//ÉèÖÃ²¨ÌØÂÊ=BUSCLK/(16*(UART0_BDH[0:1],UART0_BDL))
+ 108   1          UART0_CON2 = ((((uint)(M_HEX_OF_BR(UART0_CFG_BAUD_RATE)))>>8)&0x03);//ÉèÖÃUART0_BDH[0:1]¸ßÁ½Î»
+ 109   1          UART0_CON2 |= (UART0_TX_EN);//·¢ËÍÖÐ¶ÏÊ¹ÄÜ£¬0Îª½ûÖ¹·¢ËÍÖÐ¶Ï£¬1ÎªÔÊÐí·¢ËÍÖÐ¶Ï
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 3   
+
+ 110   1          UART0_CON2 |= (UART0_RX_EN);//½ÓÊÕÖÐ¶ÏÊ¹ÄÜ£¬0Îª½ûÖ¹½ÓÊÕÖÐ¶Ï£¬1ÎªÔÊÐí½ÓÊÕÖÐ¶Ï
+ 111   1          UART0_CON1 |= (UART0_MUDULE_EN);//Ê¹ÄÜUAERT0Ä£¿é
+ 112   1          UART0_CON1 &= (~UART0_MULTI);//1:Ê¹ÄÜ¶à´¦ÀíÆ÷Í¨ÐÅ,0:²»Ê¹ÄÜ¶à´¦ÀíÆ÷Í¨ÐÅ
+ 113   1          UART0_CON1 |= (UART0_RE_EN);//¿ªÆô½ÓÊÕÊ¹ÄÜ
+ 114   1          UART0_CON1 &= (~UART0_SEND_MODE); //·¢ËÍÊý¾ÝÄ£Ê½bit[3]£º0£º°ËÎ»Ä£Ê½£º1£º9Î»Ä£Ê½Ä£Ê½
+ 115   1          UART0_CON1 |= (UART0_STOP_BIT);//Í£Ö¹Î»;1:2Î»£»0£º1Î»
+ 116   1          UART0_CON1 &= (~UART0_ODD_EVEN_EN);//ÆæÅ¼Ð£ÑéÊ¹ÄÜ1£º¿ªÆôÆæÅ¼Ð£Ñé£»0:¹Ø±ÕÆæÅ¼Ð£Ñé
+ 117   1          UART0_CON1 |= (UART0_ODD_EVEN_SE);//ÆæÅ¼Ð£ÑéÑ¡Ôñ1£ºÆæÐ£Ñé£»0:Å¼Ð£Ñé
+ 118   1          UART0_STATE &= ((~UART0_RI)&(~UART0_TI));//Çå³ý½ÓÊÕÖÐ¶Ï±êÖ¾Î»//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾Î»
+ 119   1          UART0_IE_SET;//¿ªUARTÖÐ¶ÏÊ¹ÄÜ       
+ 120   1          EA = 1;//¿ª×ÜÖÐ¶Ï
+ 121   1        }
+ 122            
+ 123          //  #pragma disable //·¢ËÍ²»ÔÊÐíÆäËüÖÐ¶Ï´ò¶Ï
+ 124          //  void UART0_Send_Word(uint willSendWord)   
+ 125          //  {
+ 126          //      UART0_Send_Byte(willSendWord>>8);
+ 127          //      UART0_Send_Byte((uchar)willSendWord);
+ 128          //  }
+ 129            
+ 130          //  #pragma disable //·¢ËÍ²»ÔÊÐíÆäËüÖÐ¶Ï´ò¶Ï 
+ 131          //  void UART0_Send_Byte(uchar willSendByte)  
+ 132          //  {
+ 133          //      UART0_STATE = 0x0F;//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾Î»£¬·¢ËÍ8Î»Ä£Ê½
+ 134          //      UART0_BUF = willSendByte;
+ 135          
+ 136          //      while (!(UART0_STATE & UART0_TI));
+ 137          
+ 138          //      UART0_STATE = 0x0F;//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾Î»£¬·¢ËÍ8Î»Ä£Ê½
+ 139          //  }
+ 140            
+ 141            
+ 142            /* ´®¿Ú0ÖÐ¶Ï·þÎñ×Ó³ÌÐò */
+ 143            void UART0_ISR() interrupt 17
+ 144            {    
+ 145   1            unsigned char temp = 0; 
+ 146   1            static uchar xdata addr_bak = 0;
+ 147   1            PUSH_REG_ADDR_SFR();
+ 148   1            UART0_INT_FLAG_CLR;//Çå³ýUART0ÖÐ¶Ï±êÖ¾  
+ 149   1            if ((UART0_STATE & UART0_RI))
+ 150   1            {
+ 151   2                UART0_STATE = 0x17;//Çå³ý½ÓÊÕÖÐ¶Ï±êÖ¾Î»£¬·¢ËÍ8Î»Ä£Ê½
+ 152   2                temp = UART0_BUF;
+ 153   2                
+ 154   2            }
+ 155   1            if((UART0_STATE & 0x01))
+ 156   1            {
+ 157   2                UART0_STATE = 0x1E;//ÆæÅ¼Ð£Ñé´íÎó
+ 158   2            } 
+ 159   1            if((UART0_STATE & 0x02))
+ 160   1            {
+ 161   2                UART0_STATE = 0x1D;//Ö¡´íÎó
+ 162   2            }
+ 163   1            if((UART0_STATE & 0x04))
+ 164   1            {
+ 165   2                UART0_STATE = 0x1B;//½ÓÊÕÒç³ö
+ 166   2            }
+ 167   1            if((UART0_STATE & 0x10))
+ 168   1            {
+ 169   2              UART0_STATE = 0x0F;//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾
+ 170   2              //ÔÚ´ËÌí¼Ó·¢ËÍÊý¾Ý
+ 171   2            }
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 4   
+
+ 172   1            POP_REG_ADDR_SFR();
+ 173   1        }
+ 174          
+ 175          #endif
+ 176            
+ 177          #if (UART1_EN == 1)
+ 178          
+ 179            
+ 180          
+ 181            
+ 182            //-----------------------------------------------------------------//
+ 183            //º¯ÊýÃû³Æ£º void UART1_Init(void)  
+ 184            //º¯Êý¹¦ÄÜ£º UART1³õÊ¼»¯
+ 185            //ÊäÈë²ÎÊý£º ÎÞ
+ 186            //Êä³ö²ÎÊý£º ÎÞ
+ 187            //·µ »Ø Öµ£º ÎÞ
+ 188            //-----------------------------------------------------------------//
+ 189            void UART1_Init(void) 
+ 190            { 
+ 191   1            EA = 0;//¹Ø×ÜÖÐ¶Ï£»
+ 192   1            UART1_IP_SET;//ÉèÖÃUART0ÖÐ¶ÏÓÅ¼¶Îª¸ß£¬¸ù¾ÝÊµ¼ÊÓ¦ÔËÉèÖÃÓÅÏÈ¼¶
+ 193   1            UART1_INT_FLAG_CLR;//Çå³ýUART0ÖÐ¶Ï±êÖ¾
+ 194   1            UART1_PORT_SET(UART1_PORT);//´®¿Ú¹¦ÄÜÓ³ÉäÑ¡Ôñ0-ÎªÑ¡ÔñPC6/7Îª´®¿Ú£¬1Ñ¡ÔñPH4/5Îª´®¿Ú
+ 195   1            
+ 196   1          #if (UART1_PORT == UART1_PH)
+              
+                    REG_ADDR = 0x1E;REG_DATA |= 0x10;//PH4¿ªÆôÉÏÀ­
+                    REG_ADDR = 0x1E;REG_DATA |= 0x20;//PH5¿ªÆôÉÏÀ­
+                    REG_ADDR = 0x29;REG_DATA &= ~0x10;TRISH |= 0x10;//PH4ÉèÖÃRXD0ÎªÊäÈë
+                    REG_ADDR = 0x29;REG_DATA &= ~0x20;TRISH &= ~0x20;//PH5ÉèÖÃTXD0ÎªÊä³ö
+                  
+                  #elif(UART1_PORT == UART1_PC)
+ 204   1      
+ 205   1            REG_ADDR = 0x19;REG_DATA |= 0x40;//PC6¿ªÆôÉÏÀ­
+ 206   1            REG_ADDR = 0x19;REG_DATA |= 0x80;//PC7¿ªÆôÉÏÀ­
+ 207   1            REG_ADDR = 0x52;REG_DATA &= ~0x04;TRISC |= 0x40;//PC6ÉèÖÃRXD0ÎªÊäÈë
+ 208   1            REG_ADDR = 0x52;REG_DATA &= ~0x08;TRISC &= ~0x80;//PC7ÉèÖÃTXD0ÎªÊä³ö
+ 209   1          #else
+              
+                  #endif
+ 212   1      
+ 213   1          UART1_BDL = (uchar)M_HEX_OF_BR(UART1_CFG_BAUD_RATE);//ÉèÖÃ²¨ÌØÂÊ=BUSCLK/(16*(UART1_BDH[0:1],UART1_BDL))
+ 214   1          UART1_CON2 = ((((uint)(M_HEX_OF_BR(UART1_CFG_BAUD_RATE)))>>8)&0x03);//ÉèÖÃUART1_BDH[0:1]¸ßÁ½Î»
+ 215   1          UART1_CON2 |= (UART1_TX_EN);//·¢ËÍÖÐ¶ÏÊ¹ÄÜ£¬0Îª½ûÖ¹·¢ËÍÖÐ¶Ï£¬1ÎªÔÊÐí·¢ËÍÖÐ¶Ï
+ 216   1          UART1_CON2 |=(UART1_RX_EN);//½ÓÊÕÖÐ¶ÏÊ¹ÄÜ£¬0Îª½ûÖ¹½ÓÊÕÖÐ¶Ï£¬1ÎªÔÊÐí½ÓÊÕÖÐ¶Ï
+ 217   1          UART1_CON1 |= (UART1_MUDULE_EN);//Ê¹ÄÜUAERT0Ä£¿é
+ 218   1          UART1_CON1 &= (~UART1_MULTI);//1:Ê¹ÄÜ¶à´¦ÀíÆ÷Í¨ÐÅ,0:²»Ê¹ÄÜ¶à´¦ÀíÆ÷Í¨ÐÅ
+ 219   1          UART1_CON1 |= (UART1_RE_EN);//¿ªÆô½ÓÊÕÊ¹ÄÜ
+ 220   1          UART1_CON1 &=(~UART1_SEND_MODE); //·¢ËÍÊý¾ÝÄ£Ê½bit[3]£º0£º°ËÎ»Ä£Ê½£º1£º9Î»Ä£Ê½Ä£Ê½
+ 221   1          UART1_CON1 |= (UART1_STOP_BIT);//Í£Ö¹Î»;1:2Î»£»0£º1Î»
+ 222   1          UART1_CON1 &= (~UART1_ODD_EVEN_EN);//ÆæÅ¼Ð£ÑéÊ¹ÄÜ1£º¿ªÆôÆæÅ¼Ð£Ñé£»0:¹Ø±ÕÆæÅ¼Ð£Ñé
+ 223   1          UART1_CON1 |= (UART1_ODD_EVEN_SE);//ÆæÅ¼Ð£ÑéÑ¡Ôñ1£ºÆæÐ£Ñé£»0:Å¼Ð£Ñé
+ 224   1          UART1_STATE &= ((~UART1_RI)&(~UART1_TI));//Çå³ý½ÓÊÕÖÐ¶Ï±êÖ¾Î»//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾Î»
+ 225   1          UART1_IE_SET;//¿ªUARTÖÐ¶ÏÊ¹ÄÜ             
+ 226   1          EA = 1;//¿ª×ÜÖÐ¶Ï
+ 227   1        }
+ 228            
+ 229          //  #pragma disable //·¢ËÍ²»ÔÊÐíÆäËüÖÐ¶Ï´ò¶Ï
+ 230          //  void UART1_Send_Word(uint willSendWord)   
+ 231          //  {
+ 232          //      UART1_Send_Byte(willSendWord>>8);
+ 233          //      UART1_Send_Byte((uchar)willSendWord);
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 5   
+
+ 234          //  }
+ 235            
+ 236          //  #pragma disable 
+ 237          //  void UART1_Send_Byte(uchar willSendByte)  
+ 238          //  {
+ 239          //      UART1_STATE = 0x0F;//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾Î»£¬·¢ËÍ8Î»Ä£Ê½
+ 240          //      UART1_BUF = willSendByte;
+ 241          
+ 242          //      while (!(UART1_STATE & UART1_TI));
+ 243          //      UART1_STATE = 0x0F;//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾Î»£¬·¢ËÍ8Î»Ä£Ê½
+ 244          //  }
+ 245            
+ 246            
+ 247            /* ´®¿Ú1ÖÐ¶Ï·þÎñ×Ó³ÌÐò */
+ 248            void UART1_ISR() interrupt 18
+ 249            {    
+ 250   1            unsigned char temp; 
+ 251   1            static uchar xdata addr_bak = 0;
+ 252   1            PUSH_REG_ADDR_SFR();
+ 253   1            UART1_INT_FLAG_CLR;//Çå³ýUART1ÖÐ¶Ï±êÖ¾     
+ 254   1            if ((UART1_STATE & UART1_RI))
+ 255   1            {
+ 256   2                UART1_STATE = 0x17;//Çå³ý½ÓÊÕÖÐ¶Ï±êÖ¾Î»£¬·¢ËÍ8Î»Ä£Ê½
+ 257   2      //          temp = UART1_BUF; 
+ 258   2                
+ 259   2            } 
+ 260   1            if((UART1_STATE & 0x01))
+ 261   1            {
+ 262   2                UART1_STATE = 0x1E;//ÆæÅ¼Ð£Ñé´íÎó
+ 263   2            } 
+ 264   1            if((UART1_STATE & 0x02))
+ 265   1            {
+ 266   2                UART1_STATE = 0x1D;//Ö¡´íÎó
+ 267   2            }
+ 268   1            if((UART1_STATE & 0x04))
+ 269   1            {
+ 270   2                UART1_STATE = 0x1B;//½ÓÊÕÒç³ö
+ 271   2            }
+ 272   1            
+ 273   1            if((UART1_STATE & 0x10))
+ 274   1            {
+ 275   2                UART1_STATE = 0x0F;//Çå³ý·¢ËÍÖÐ¶Ï±êÖ¾
+ 276   2                //ÔÚ´ËÌí¼Ó·¢ËÍÊý¾Ý
+ 277   2      //          UART1_BUF = 0xFF;
+ 278   2                g_View.SendingState = SET;
+ 279   2            }
+ 280   1            POP_REG_ADDR_SFR();
+ 281   1        }
+ 282          
+ 283          #endif
+ 284            
+ 285          #if (UART2_EN == 1)
+                  #pragma message "±àÒë,UART2¹¦ÄÜ"
+                  /****************************************************************/
+                  //º¯ÊýÃû£ºvoid UART2_Send_NByte(uchar n,uchar *nSendByte)  
+                  //¹¦  ÄÜ£ºUART2·¢ËÍN BYTES
+                  //²Î  Êý£ºuchar n:·¢ËÍ×Ö½ÚÊý£»uchar *nSendByte£º·¢ËÍÊý¾ÝÖ¸Õë
+                  //·µ»ØÖµ£ºÎÞ
+                  /****************************************************************/
+              
+              //    void UART2_Send_NByte(uchar n,uchar *nSendByte)  
+              //    {
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 6   
+
+              //        uchar i = 0;
+              //        for(i = 0; i < n; i++)
+              //        {
+              //          UART2_Send_Byte(*(nSendByte + i));
+              //        }   
+              //    }
+              
+                
+                //-----------------------------------------------------------------//
+                //º¯ÊýÃû³Æ£º void UART2_Init(void)  
+                //º¯Êý¹¦ÄÜ£º UART2³õÊ¼»¯
+                //ÊäÈë²ÎÊý£º ÎÞ
+                //Êä³ö²ÎÊý£º ÎÞ
+                //·µ »Ø Öµ£º ÎÞ
+                //-----------------------------------------------------------------//
+                void UART2_Init(void) 
+                { 
+              
+                    EA = 0;//¹Ø×ÜÖÐ¶Ï£»
+                    UART2_IP_SET;//ÉèÖÃUART1ÖÐ¶ÏÓÅ¼¶Îª¸ß£¬¸ù¾ÝÊµ¼ÊÓ¦ÔËÉèÖÃÓÅÏÈ¼¶
+                    UART2_INT_FLAG_CLR;//Çå³ýUART2ÖÐ¶Ï±êÖ¾
+                    REG_ADDR = 0x51;REG_DATA &= ~0x20;TRISB &= ~0x02;//PB1ÉèÖÃÎªÊä³ö
+                    REG_ADDR = 0x51;REG_DATA &= ~0x10;TRISB |= 0x01; //PB0ÉèÖÃÎªÊäÈë
+                    UART2_BREAK_CHECK_IE_SET(0);//UART2¼ä¸ô¶ÎÖÐ¶ÏÊ¹ÄÜ,1Îª¿ª¼ä¸ô¶ÎÖÐ¶ÏÊ¹ÄÜ£¬0Îª¹Ø¼ä¸ô¶ÎÖÐ¶ÏÊ¹ÄÜ
+                    UART2_RXD_EDGE_IE_SET(0);//UART2RXD»î¶¯±ßÑØÖÐ¶ÏÊ¹ÄÜ,1Îª¿ªRXD»î¶¯±ßÑØÖÐ¶ÏÊ¹ÄÜ£¬0Îª¹ØRXD»î¶¯±ßÑØÖÐ¶ÏÊ¹ÄÜ
+                  
+                    UART2_MODE_SET(0);//UART2Ä£Ê½Ñ¡Ôñ,1ÎªÑ­»·Ä£Ê½»òµ¥ÏßÄ£Ê½£¬0ÎªË«ÏßÄ£Ê½
+                    UART2_STOP_MODE_SET(1);//UART2 STOPÎ»Ä£Ê½Ñ¡Ôñ,1Îª2bits£¬0Îª1bit
+                    UART2_SINGLE_MODE_SET(1);//UART2_MODE_SET(1)µ¥ÏßÄ£Ê½Ê±£¬1ÎªTXDÒý½ÅÓÐÐ§£¬0ÎªTXDÒý½ÅÎÞÐ§
+                    UART2_DATA_MODE_SET(0);//UART2Êý¾ÝÄ£Ê½Ñ¡Ôñ,1Îª9Î»Ä£Ê½(µÚ¾ÅÎ»Î»ÆæÅ¼Ð£ÑéÎ»)£¬0Îª8Î»Ä£Ê½
+                    UART2_PARITY_EN_SET(0);//UART2ÆæÅ¼Ð£ÑéÎ»Ê¹ÄÜ,1ÎªÊ¹ÄÜÆæÅ¼Ð£ÑéÎ»£¬0Îª²»Ê¹ÄÜÆæÅ¼Ð£ÑéÎ»
+                    UART2_PARITY_SEL(0);//UART2ÆæÅ¼Ð£ÑéÎ»Ñ¡Ôñ,1ÎªÆæÐ£Ñé£¬0ÎªÅ¼Ð£Ñé
+                    UART2_RATE_MATCH_EN(0);//UART2Í¬²½¶Î(0x55)²¨ÌØÂÊ×Ô¶¯Æ¥ÅäÊ¹ÄÜ,1Îª×ÔÊÊÓ¦²¨ÌØÂÊ¸üÐÂ£¬0Îª¹Ì¶¨ÅäÖÃ²¨ÌØÂÊ
+                    UART2_CLK_SEL(1);//UART2Ä£¿é¹¤×÷Ê±ÖÓÊ¹ÄÜ,1Îª´ò¿ª¹¤×÷Ê±ÖÓ£¬0Îª¹Ø±Õ²¢¸´Î»Ä£¿é
+              
+                    UART2_TX_EMPTY_IE_SET(0); //UART2·¢ËÍ»º´æ¿ÕÖÐ¶ÏÊ¹ÄÜ,1ÎªÖÐ¶ÏÊ¹ÄÜ£¬0ÎªÖÐ¶Ï½ûÖ¹
+                    UART2_TX_FINISH_IE_SET(1);//UART2·¢ËÍ»º´æÍê³ÉÖÐ¶ÏÊ¹ÄÜ,1ÎªÖÐ¶ÏÊ¹ÄÜ£¬0ÎªÖÐ¶Ï½ûÖ¹  
+                    UART2_RX_FULL_IE_SET(1);//UART2½ÓÊÕÂúÖÐ¶ÏÊ¹ÄÜ,1ÎªÖÐ¶ÏÊ¹ÄÜ£¬0ÎªÖÐ¶Ï½ûÖ¹  
+                    UART2_IDLE_IE_SET(0);//UART2¿ÕÏÐÂ·ÏßÖÐ¶ÏÊ¹ÄÜ,1ÎªÖÐ¶ÏÊ¹ÄÜ£¬0ÎªÖÐ¶Ï½ûÖ¹   
+                    UART2_TRANS_EN_SET(1);//UART2·¢ËÍÆ÷Ê¹ÄÜ,1Îª´ò¿ª£¬0Îª¹Ø±Õ£¬Çå0ÔÙÐ´1¿ÉÒÔÅÅ¶Ó·¢ËÍÒ»¸öÏÐÖÃ×Ö·û    
+                    UART2_RECEIVE_EN_SET(1);//UART2½ÓÊÕÆ÷Ê¹ÄÜ,1Îª´ò¿ª£¬0Îª¹Ø±Õ    
+                    UART2_RWU_SET(0);//UART2½ÓÊÕÆ÷»½ÐÑ¿ØÖÆ,1Îª½ÓÊÕÆ÷´¦ÓÚ´ý»ú×´Ì¬£¬µÈ´ý»½ÐÑÌõ¼þ£¬0Îª½ÓÊÕÆ÷Õý³£ÔËÐÐ         
+                    UART2_BREAK_TRANS_SET(0);//UART2·¢ËÍÊý¾ÝÁ÷ÖÐÅÅÈëÒ»¸ö¼ä¸ô¶Î,1ÎªÅÅÈëÒ»¸ö¼ä¸ô¶Î(Ð´1ºóÔÙÐ´0µ½¸ÃÎ»)£¬0Îª²»ÅÅ
+             -ÈëÒ»¸ö¼ä¸ô¶Î  
+              
+              
+                    UART2_SINGLE_DIR_SET(1);//UART2_MODE_SET(1)µ¥ÏßÄ£Ê½Ê±£¬1ÎªTXDÊä³ö£¬0ÎªTXDÊäÈë   
+                    UART2_TXD_INV_SET(0); //TXD¶ËÊý¾Ý·´ÏàÉèÖÃ£¬1ÎªTXD·¢ËÍÊý¾Ý·´Ïà£¬0ÎªTXD·¢ËÍÊý¾Ý²»·´Ïà     
+                    UART2_RXD_INV_SET(0);//RXD¶ËÊý¾Ý·´ÏàÉèÖÃ£¬1ÎªRXD½ÓËÍÊý¾Ý·´Ïà£¬0ÎªRXD½ÓËÍÊý¾Ý²»·´Ïà      
+                    UART2_RWU_IDLE_SEL(0);//½ÓÊÕ»½ÐÑÏÐÖÃ¼ì²â£¬ÔÚ½ÓÊÕ´ý»ú×´Ì¬(RWU = 1)ÆÚ¼ä£¬1Îª¼ì²âµ½ÏÐÖÃ×Ö·ûÊ±ÉèÖÃIDLEÎ»£¬0
+             -Îª¼ì²âµ½ÏÐÖÃ×Ö·ûÊ±²»ÉèÖÃIDLEÎ»      
+                    UART2_IDLE_SEL(0);//ÏÐÖÃÏßÂ·ÀàÐÍ£¬1ÎªÍ£Ö¹Î»ºóÏÐÖÃ×Ö·û¼ÆÊý¿ªÊ¼£¬0Îª¿ªÊ¼Î»ºóÏÐÖÃ×Ö·û¼ÆÊý¿ªÊ¼£¬¼ÆÊý10Î»Ê±¼
+             -ä(Èç¹ûdata_mode = 1»òstop_mode = 1,Ôò·Ö±ðÔö¼Ó1Î»Ê±¼ä)         
+                    UART2_WAKE_SEL(0);//½ÓÊÕÆ÷»½ÐÑ·½Ê½Ñ¡Ôñ£¬1ÎªµØÖ·±ê¼Ç»½ÐÑ£¬0ÎªÏÐÖÃÂ·Ïß»½ÐÑ          
+              
+                    UART2_BREAK_TRANS_SIZE(0);//¼ä¸ô¶ÎÉú³ÉÎ»³¤¶È£¬1ÎªÓÃ13Î»Ê±¼ä·¢ËÍ³¤¶È(Èç¹ûdata_mode = 1»òstop_mode = 1,Ôò
+             -·Ö±ðÔö¼Ó1Î»Ê±¼ä)£¬0ÎªÓÃ10Î»Ê±¼ä·¢ËÍ³¤¶È(Èç¹ûdata_mode = 1»òstop_mode = 1,Ôò·Ö±ðÔö¼Ó1Î»Ê±¼ä)
+                    UART2_BREAK_CHECK_EN(0);//¼ä¸ô¶Î¼ì²âÊ¹ÄÜ£¬1ÎªÔÚ11Î»Ê±¼ä³¤¶È¼ì²â(Èç¹ûdata_mode = 1»òstop_mode = 1,Ôò·Ö±ð
+             -Ôö¼Ó1Î»Ê±¼ä)£¬0Îª²»¼ì²â  
+              
+                    UART2_BDL_SET((uchar)M_HEX_OF_BR(UART2_CFG_BAUD_RATE));//ÉèÖÃ²¨ÌØÂÊ=BUSCLK/(16*(UART2_BDH[4:0],UART2_BD
+             -L))
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 7   
+
+                    UART2_BDH_SET(((((uint)(M_HEX_OF_BR(UART2_CFG_BAUD_RATE)))>>8)&0x1F));//ÉèÖÃUART2_BDH[4:0]¸ß5Î»
+                    UART2_IE_SET;//¿ªUART2ÖÐ¶ÏÊ¹ÄÜ        
+                    EA = 1;//¿ª×ÜÖÐ¶Ï
+                }
+                
+              //  #pragma disable //·¢ËÍ²»ÔÊÐíÆäËüÖÐ¶Ï´ò¶Ï
+              //  void UART2_Send_Word(uint willSendWord)   
+              //  {
+              //      UART2_Send_Byte(willSendWord>>8);
+              //      UART2_Send_Byte((uchar)willSendWord);
+              //  }
+                
+              //  #pragma disable //·¢ËÍ²»ÔÊÐíÆäËüÖÐ¶Ï´ò¶Ï 
+              //  void UART2_Send_Byte(uchar willSendByte)  
+              //  {
+              //      UART2_INT_IF_TF_CLR(1);//Ð´1Çå³ýUART2_TF±êÖ¾Î»
+              //      UART2_INT_IF_TE_CLR(1);//Ð´1Çå³ýUART2_TE±êÖ¾Î»
+              //      UART2_INT_IF_RF_CLR(1);//Ð´1Çå³ýUART2_RF±êÖ¾Î»
+              //      UART2_TRANS_ENABLE();//UART2·¢ËÍÆ÷Ê¹ÄÜ,1Îª´ò¿ª£¬0Îª¹Ø±Õ£¬Çå0ÔÙÐ´1¿ÉÒÔÅÅ¶Ó·¢ËÍÒ»¸öÏÐÖÃ×Ö·û 
+              //      UART2_TX_EMPTY_IE_SET(0); //UART2·¢ËÍ»º´æ¿ÕÖÐ¶ÏÊ¹ÄÜ,1ÎªÖÐ¶ÏÊ¹ÄÜ£¬0ÎªÖÐ¶Ï½ûÖ¹
+              //      if(SCI_C2 & 0x08)
+              //      {
+              //        
+              //        UART2_BUF = willSendByte;
+              //        while(UART2_TF == 0);
+              //        
+              //        UART2_INT_IF_TF_CLR(1);//Ð´1Çå³ýUART2_TF±êÖ¾Î»
+              //        UART2_INT_IF_TE_CLR(1);//Ð´1Çå³ýUART2_TE±êÖ¾Î»
+              //        UART2_INT_IF_RF_CLR(1);//Ð´1Çå³ýUART2_RF±êÖ¾Î»
+              //        
+              //      }
+              //      
+              //  }
+                
+                
+                /* ´®¿Ú2ÖÐ¶Ï·þÎñ×Ó³ÌÐò */
+                void UART2_ISR() interrupt 15
+                {    
+                    unsigned char temp; 
+                    static uchar xdata addr_bak = 0;
+                    PUSH_REG_ADDR_SFR();
+                    UART2_INT_FLAG_CLR;//Çå³ýUART2ÖÐ¶Ï±êÖ¾    
+                      
+                    if(SCI_C2 & 0x20)
+                    {
+                      if(UART2_RI != 0)
+                      {
+                          UART2_INT_IF_RF_CLR(1);//Ð´1Çå³ýUART2_RF±êÖ¾Î»
+                          temp = UART2_BUF;
+                          
+                      }
+                    }
+                    
+                    if(SCI_C2 & 0x80)//¿ªÆôÁË·¢ËÍ»º´æ¿ÕÎªÖÐ¶Ï
+                    {
+                      if(UART2_TE != 0)
+                      {
+                          UART2_INT_IF_TE_CLR(1);//Ð´1Çå³ýUART2_TE±êÖ¾Î»
+                          if(UART2_TE != 0)
+                          {
+                              UART2_INT_IF_TE_CLR(1);//Ð´1Çå³ýUART2_TF±êÖ¾Î»6
+                              //ÔÚ´ËÌí¼Ó·¢ËÍÊý¾Ý
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_UART                                          04/23/2024 20:16:28 PAGE 8   
+
+                          }  
+                      } 
+                    }
+                    
+                    if(SCI_C2 & 0x40)//¿ªÆôÁË·¢ËÍ»ºÍê³ÉÎªÖÐ¶Ï
+                    {
+                      if(UART2_TF != 0)
+                      {
+                          UART2_INT_IF_TF_CLR(1);//Ð´1Çå³ýUART2_TF±êÖ¾Î»6
+                          //ÔÚ´ËÌí¼Ó·¢ËÍÊý¾Ý
+                      }   
+                    }
+                    POP_REG_ADDR_SFR();
+                }
+              
+              #endif
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

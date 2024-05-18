@@ -1,0 +1,176 @@
+C51 COMPILER V9.60.7.0   SM16306SJ                                                         04/23/2024 20:16:29 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SM16306SJ
+OBJECT MODULE PLACED IN .\Output\SM16306SJ.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Hardware\SM16306SJ.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Applic
+                    -ation_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\SM16306SJ.lst) TABS(2) OBJECT(.\
+                    -Output\SM16306SJ.obj)
+
+line level    source
+
+   1          #include "Include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\ÏîÄ¿\´úÂë\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          #include "Config.h"
+   3          #include <stdio.h>
+   4          #include <stdlib.h>
+   5          #include <string.h>
+   6          #include "Define.h"
+   7          #include "SM16306SJ.h"
+   8          
+   9          //#include "View.h"
+  10          
+  11          
+  12          
+  13          
+  14          unsigned char idata SM16xx_Dat[6];
+  15          unsigned char idata SM16xx_DatRs[6];
+  16          
+  17          unsigned char idata SM16xx_KeyTab[6];
+  18          unsigned char idata SM16xx_KeyTabRS[6];
+  19          
+  20          uint8 KeyScan_Step;
+  21          
+  22          xdata uint16 r_SM16106 = 0x0000;
+  23          
+  24          
+  25          
+  26          void Delay_NOP(uint8_t Nop_Cnt) {
+  27   1        while (Nop_Cnt > 0)
+  28   1          {
+  29   2            Nop_Cnt--;
+  30   2          }
+  31   1      }
+  32          
+  33          void SM16xx_WriteOneByte(uint16_t Dat_OneByte) {
+  34   1        uint8_t i;
+  35   1        SM16xx_CLK = 0;
+  36   1        Delay_NOP(NOP_TIM);
+  37   1        for (i = 0; i < 16; i++)
+  38   1          {
+  39   2            SM16xx_CLK = 0;
+  40   2            if (Dat_OneByte & 0x8000) {
+  41   3              SM16xx_SDI = 1;
+  42   3            } else {
+  43   3              SM16xx_SDI = 0;
+  44   3            }
+  45   2            Dat_OneByte = Dat_OneByte << 1;
+  46   2            SM16xx_CLK = 1;
+  47   2            Delay_NOP(NOP_TIM);
+  48   2          }
+  49   1        SM16xx_CLK = 0;
+  50   1      }
+  51          
+  52          unsigned char SM16xx_WriteAll_Cnt = 0;
+C51 COMPILER V9.60.7.0   SM16306SJ                                                         04/23/2024 20:16:29 PAGE 2   
+
+  53          unsigned char SM16xx_ScanCNT = 0;
+  54          unsigned char SM16xx_Step = 0;
+  55          unsigned char KeyScan_Step = 0;
+  56          
+  57          
+  58          unsigned char HuXiDengRunStep = 0;
+  59          unsigned char HuXiDengRunTimeBasicCnt = 0;
+  60          unsigned char HuXiDengRunDutyCnt = 0;
+  61          unsigned char HuXiDengRunDuty = 0;
+  62          
+  63          
+  64          void SM16xx_Init(void) {
+  65   1        
+  66   1        memset(pSM16106, 0, sizeof(SM16106_T));
+  67   1        
+  68   1        SET_PF5_IO_OUT;
+  69   1        SET_PE2_IO_OUT;
+  70   1        SET_PG0_IO_OUT;
+  71   1        SET_PG1_IO_OUT;
+  72   1        
+  73   1        SM16xx_LE = 0;
+  74   1        SM16xx_OE = 0;
+  75   1        SM16xx_CLK = 0;
+  76   1        SM16xx_SDI = 0;
+  77   1      
+  78   1        SET_PH2_IO_OUT;
+  79   1        SET_PH1_IO_OUT;
+  80   1        SET_PB5_IO_OUT;
+  81   1        SET_PB4_IO_OUT;
+  82   1        SET_PB3_IO_OUT;
+  83   1        SET_PB2_IO_OUT;
+  84   1        SET_PB1_IO_OUT;
+  85   1        SET_PB0_IO_OUT;
+  86   1        SET_PA1_IO_OUT;
+  87   1        SET_PA0_IO_OUT;
+  88   1        SET_PH0_IO_OUT;
+  89   1        SET_PG3_IO_OUT;
+  90   1        SET_PG2_IO_OUT;
+  91   1        SET_PE7_IO_OUT;
+  92   1        SET_PE6_IO_OUT;
+  93   1        SET_PE1_IO_OUT;
+  94   1      
+  95   1      #if(0)  
+                Port_COM1 = 0;
+                Port_COM2 = 0;
+              
+                Port_SW1 = 0;     
+                Port_SW2 = 0;   
+                Port_SW3 = 0;   
+                Port_SW4 = 0;     
+                Port_SW5 = 0;     
+                Port_SW6 = 0;     
+                Port_SW7 = 0;   
+                Port_SW8 = 0;   
+                Port_SW9 = 0;   
+                Port_SW10 = 0;      
+                Port_SW11 = 0;
+                Port_SW12 = 0;      
+                Port_SW13 = 0;
+              #endif
+ 113   1      
+ 114   1      
+C51 COMPILER V9.60.7.0   SM16306SJ                                                         04/23/2024 20:16:29 PAGE 3   
+
+ 115   1      #if(1)
+ 116   1        Port_COM1 = 1;
+ 117   1        Port_COM2 = 1;
+ 118   1      
+ 119   1        Port_SW1 = 1;     
+ 120   1        Port_SW2 = 1;   
+ 121   1        Port_SW3 = 1;   
+ 122   1        Port_SW4 = 1;     
+ 123   1        Port_SW5 = 1;     
+ 124   1        Port_SW6 = 1;     
+ 125   1        Port_SW7 = 1;   
+ 126   1        Port_SW8 = 1;   
+ 127   1        Port_SW9 = 1;   
+ 128   1        Port_SW10 = 1;      
+ 129   1        Port_SW11 = 1;
+ 130   1        Port_SW12 = 1;      
+ 131   1        Port_SW13 = 1;
+ 132   1        Port_HandMove = 1;
+ 133   1      #endif  
+ 134   1      
+ 135   1      }
+ 136          
+ 137          
+ 138          
+ 139          void SM16xx_WriteAll(void){
+ 140   1          
+ 141   1          SM16xx_OE = 1;
+ 142   1          SM16xx_LE = 1;
+ 143   1      
+ 144   1          SM16xx_WriteOneByte(r_SM16106);
+ 145   1      
+ 146   1      //    SM16xx_WriteOneByte(0xFFFF);
+ 147   1          
+ 148   1          SM16xx_LE = 0;
+ 149   1            
+ 150   1          SM16xx_OE = 0;
+ 151   1      } 
+ 152          
+ 153          
+ 154          
+ 155          
+ 156          
+ 157          
+ 158           
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

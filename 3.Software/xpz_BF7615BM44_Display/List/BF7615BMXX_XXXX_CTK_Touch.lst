@@ -1,0 +1,391 @@
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/23/2024 20:16:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_CTK_TOUCH
+OBJECT MODULE PLACED IN .\Output\BF7615BMXX_XXXX_CTK_Touch.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_CTK_Lib\BF7615BMXX_XXXX_CTK_Touc
+                    -h.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardwa
+                    -re) DEBUG PRINT(.\List\BF7615BMXX_XXXX_CTK_Touch.lst) TABS(2) OBJECT(.\Output\BF7615BMXX_XXXX_CTK_Touch.obj)
+
+line level    source
+
+   1          #include ".\BF7615BMXX_XXXX_Library\Config.h"
+   2          
+   3          #if SNS_NUM
+   4            #pragma message "编译,CTK功能"
+*** MESSAGE C286 IN LINE 4 OF BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_CTK_Lib\BF7615BMXX_XXXX_CTK_Touch.c: 编译,CTK功能
+   5            uchar xdata Sns_Count = 0;
+   6            uchar xdata CFG_Rb = 200;
+   7            #if UN_NORMAL_CHECK
+                //-----------------------------------------------------------------//
+                //函数名称： void Rawdata_Un_Normal(uchar sns_num)
+                //函数功能： Rawdata异常判断,注：此函数不能识别所有异常情况
+                //输入参数： uchar sns_num：通道索引
+                //输出参数： 无
+                //返 回 值： 无
+                //-----------------------------------------------------------------//
+                void Rawdata_Un_Normal(uchar sns_num)
+                {
+                  if(un_normal_flag == 0)
+                  {
+                      if(raw_data[sns_num] >= (((unsigned long)(((unsigned long)0x0001)<<(((SNS_SCAN_CFG3>>4)&0x07) + 9)))*8
+             -/10))  
+                      {
+                          
+                          un_normal_count++;
+                          if(un_normal_count >= UN_NORMAL_MAX_COUNT)
+                          {
+                              un_normal_count = 0;
+                        
+                              if(un_normal_recover_count < UN_NORMAL_RECOVER_MAX_COUNT)//允许异常判断恢复un_normal_recover_max_c
+             -ount次
+                              {               
+                                  
+                                  EA = 0;                     //关总中断
+                                  adjust_done_flag = 0;
+                                  un_normal_recover_count++;
+                                  CTK_IE_SET;
+                                  CTK_ADDR_SET(sensor_open[0]);
+                                  CTK_START;
+                                  EA = 1;                     //开总中断
+              
+                              }
+                              
+                              
+                          }
+                          
+                      }
+                    
+                  } 
+              
+                }
+                #endif
+  49          #endif
+  50          //-----------------------------------------------------------------//
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/23/2024 20:16:28 PAGE 2   
+
+  51          //函数名称： void BF7615BMXX_XXXXX_Set_Touch_Flag(void)
+  52          //函数功能： 触摸判断并置位或者清除触摸标志位
+  53          //输入参数： 无
+  54          //输出参数： 无
+  55          //返 回 值： 无
+  56          //-----------------------------------------------------------------//
+  57          
+  58          void BF7615BMXX_XXXX_Set_Touch_Flag(void)
+  59          {
+  60   1        #if SNS_NUM 
+  61   1        
+  62   1          #if TRACEMODE
+                  uchar i = 0;
+                  #endif
+  65   1        
+  66   1          #if (IDLE_MODE == 1)
+                    if(parallel_mode == 0)
+                    {
+                      if(ctk_circle_done == 1)//中断模式
+                      {
+                        ctk_circle_done = 0;
+                        CTK_IE_CLR;//关CTK中断
+                        multi_key_count = 0;
+                        for(Sns_Count = 0; Sns_Count < SNS_NUM; Sns_Count++)
+                        {
+                          if(SNS[Sns_Count] != 255)
+                          {
+                            
+                            CTK_SNS_Renovate(Sns_Count,((ulong)FTH[sensor_open[Sns_Count]]*(CFG_Rb*100/200))/100);
+                            
+                            #if (MULTI_KEY_MAX_COUNT != 0)
+                              if((muli_key_flag_l & (((unsigned long)0x01) << sensor_open[Sns_Count]))||(muli_key_flag_h & (((un
+             -signed long)0x01) << (sensor_open[Sns_Count]-32))))
+                              {
+                                multi_key_count++;//多按键计数            
+                              }
+                            #endif
+                            
+                            CTK_BF7615BMXX_XXXX_Get_KEYS_Touch(Sns_Count);
+                            
+                            #if TRACEMODE
+                              #if (SNS_NUM < 32)
+                              {
+                                if(sensor_open[Sns_Count] < 32)
+                                {
+                                  if(keys_flag_l & ((long)0x01 << sensor_open[Sns_Count]))
+                                  {
+                                    keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                  
+                                  }
+                                  else
+                                  {
+                                    keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                  }
+                                }
+                                else
+                                {
+                                  if(keys_flag_h & ((long)0x01 << (sensor_open[Sns_Count]-32)))
+                                  {
+                                    keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                  
+                                  }
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/23/2024 20:16:28 PAGE 3   
+
+                                  else
+                                  {
+                                    keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                  }
+                                }
+                              }
+                              #else
+                              {
+                                if(sensor_open[Sns_Count] < 32)
+                                {
+                                  if(keys_flag_l & ((long)0x01 << sensor_open[Sns_Count]))
+                                  {
+                                    if(Sns_Count<32)
+                                    {
+                                      keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                    }
+                                    else
+                                    {
+                                      keys_flag_h_Tracemode |= ((long)0x01 << (Sns_Count-32));
+                                    }
+                                    
+                                  }
+                                  else
+                                  {
+                                    if(Sns_Count<32)
+                                    {
+                                      keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                    }
+                                    else
+                                    {
+                                      keys_flag_h_Tracemode &= ~((long)0x01 << (Sns_Count-32));
+                                    }
+                                  }
+                                }
+                                else
+                                {
+                                  if(keys_flag_h & ((long)0x01 << (sensor_open[Sns_Count] - 32)))
+                                  {
+                                    if(Sns_Count<32)
+                                    {
+                                      keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                    }
+                                    else
+                                    {
+                                      keys_flag_h_Tracemode |= ((long)0x01 << (Sns_Count-32));
+                                    }
+                                    
+                                  }
+                                  else
+                                  {
+                                    if(Sns_Count<32)
+                                    {
+                                      keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                    }
+                                    else
+                                    {
+                                      keys_flag_h_Tracemode &= ~((long)0x01 << (Sns_Count-32));
+                                    }
+                                  }
+                                }
+                              }
+                              #endif
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/23/2024 20:16:28 PAGE 4   
+
+                            #endif
+                            
+                            #if UN_NORMAL_CHECK
+                              Rawdata_Un_Normal(Sns_Count);
+                            #endif
+                          }
+                          
+                        }
+                        #if (MULTI_KEY_MAX_COUNT != 0)
+                          if(multi_key_count > MULTI_KEY_MAX_COUNT)
+                          {
+                              keys_flag_l= 0;
+                              keys_flag_h= 0;
+                              multi_key_count = 0;
+                              multi_key_reset_cnt++;
+                              if(multi_key_reset_cnt >= MULTI_KEY_RST_COUNT)
+                              {
+                                
+                                multi_key_reset_cnt = 0;
+                                Base_Line_Init();
+                              }
+                          }
+                          else
+                          {
+                            multi_key_reset_cnt = 0;    
+                          }
+                        #endif
+                        CTK_IE_SET;//开CTK中断
+                      }
+                    }
+                    else
+                    {       
+                        Idle();       
+                    }
+                  #else
+ 209   1              if(ctk_circle_done == 1)//中断模式
+ 210   1              {
+ 211   2                ctk_circle_done = 0;
+ 212   2                CTK_IE_CLR;//关CTK中断
+ 213   2                multi_key_count = 0;
+ 214   2                for(Sns_Count = 0; Sns_Count < SNS_NUM; Sns_Count++)
+ 215   2                {
+ 216   3                  if(sensor_open[Sns_Count] != 255)
+ 217   3                  {
+ 218   4                  
+ 219   4                    CTK_SNS_Renovate(Sns_Count,((ulong)FTH[sensor_open[Sns_Count]]*(CFG_Rb*100/200))/100);
+ 220   4                    #if (MULTI_KEY_MAX_COUNT != 0)
+                              if((muli_key_flag_l & (((unsigned long)0x01) << sensor_open[Sns_Count]))||(muli_key_flag_h & (((un
+             -signed long)0x01) << (sensor_open[Sns_Count]-32))))
+                              {
+                                multi_key_count++;//多按键计数            
+                              }
+                            #endif
+ 226   4                    
+ 227   4                    CTK_BF7615BMXX_XXXX_Get_KEYS_Touch(Sns_Count);
+ 228   4                    #if TRACEMODE
+                                #if (SNS_NUM < 32)
+                                {
+                                  if(sensor_open[Sns_Count] < 32)
+                                  {
+                                    if(keys_flag_l & ((long)0x01 << sensor_open[Sns_Count]))
+                                    {
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/23/2024 20:16:28 PAGE 5   
+
+                                      keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                    
+                                    }
+                                    else
+                                    {
+                                      keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                    }
+                                  }
+                                  else
+                                  {
+                                    if(keys_flag_h & ((long)0x01 << (sensor_open[Sns_Count]-32)))
+                                    {
+                                      keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                    
+                                    }
+                                    else
+                                    {
+                                      keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                    }
+                                  }
+                                }
+                                #else
+                                {
+                                  if(sensor_open[Sns_Count] < 32)
+                                  {
+                                    if(keys_flag_l & ((long)0x01 << sensor_open[Sns_Count]))
+                                    {
+                                      if(Sns_Count<32)
+                                      {
+                                        keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                      }
+                                      else
+                                      {
+                                        keys_flag_h_Tracemode |= ((long)0x01 << (Sns_Count-32));
+                                      }
+                                      
+                                    }
+                                    else
+                                    {
+                                      if(Sns_Count<32)
+                                      {
+                                        keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                      }
+                                      else
+                                      {
+                                        keys_flag_h_Tracemode &= ~((long)0x01 << (Sns_Count-32));
+                                      }
+                                    }
+                                  }
+                                  else
+                                  {
+                                    if(keys_flag_h & ((long)0x01 << (sensor_open[Sns_Count] - 32)))
+                                    {
+                                      if(Sns_Count<32)
+                                      {
+                                        keys_flag_l_Tracemode |= ((long)0x01 << Sns_Count);
+                                      }
+                                      else
+                                      {
+                                        keys_flag_h_Tracemode |= ((long)0x01 << (Sns_Count-32));
+                                      }
+                                      
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/23/2024 20:16:28 PAGE 6   
+
+                                    }
+                                    else
+                                    {
+                                      if(Sns_Count<32)
+                                      {
+                                        keys_flag_l_Tracemode &= ~((long)0x01 << Sns_Count);
+                                      }
+                                      else
+                                      {
+                                        keys_flag_h_Tracemode &= ~((long)0x01 << (Sns_Count-32));
+                                      }
+                                    }
+                                  }
+                                }
+                                #endif
+              
+                            #endif  
+ 314   4                    
+ 315   4                    #if UN_NORMAL_CHECK
+                              Rawdata_Un_Normal(Sns_Count);
+                            #endif
+ 318   4                  }
+ 319   3                }
+ 320   2                #if (MULTI_KEY_MAX_COUNT != 0)
+                          if(multi_key_count > MULTI_KEY_MAX_COUNT)
+                          {
+                              keys_flag_l= 0;
+                              keys_flag_h= 0;
+                              multi_key_count = 0;
+                              multi_key_reset_cnt++;
+                              if(multi_key_reset_cnt >= MULTI_KEY_RST_COUNT)
+                              {                 
+                                multi_key_reset_cnt = 0;
+                                Base_Line_Init();
+                              }
+                          }
+                          else
+                          {
+                            multi_key_reset_cnt = 0;    
+                          }
+                        #endif
+ 338   2                
+ 339   2                CTK_IE_SET;//开CTK中断
+ 340   2              }
+ 341   1          #endif
+ 342   1          
+ 343   1        #endif
+ 344   1      }
+ 345          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    156    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      2    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_CTK_TOUCH                                         04/23/2024 20:16:28 PAGE 7   
+
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

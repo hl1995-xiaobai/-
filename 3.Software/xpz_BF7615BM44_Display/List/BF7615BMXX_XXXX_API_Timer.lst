@@ -1,0 +1,502 @@
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BF7615BMXX_XXXX_API_TIMER
+OBJECT MODULE PLACED IN .\Output\BF7615BMXX_XXXX_API_Timer.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_API_Lib\BF7615BMXX_XXXX_API_Time
+                    -r.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardwa
+                    -re) DEBUG PRINT(.\List\BF7615BMXX_XXXX_API_Timer.lst) TABS(2) OBJECT(.\Output\BF7615BMXX_XXXX_API_Timer.obj)
+
+line level    source
+
+   1          #include "include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\ÏîÄ¿\´úÂë\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          
+   3          #include ".\BF7615BMXX_XXXX_Library\Config.h"
+   4          /****************************************************************/
+   5          //timer²Î¿¼·¶Àý£ºBF7615BMXX_XXXX_API_Timer.cºÍBF7615BMXX_XXXX_API_Timer.h
+   6          /****************************************************************/
+   7          
+   8          
+   9          uchar Test = 0;
+  10          
+  11          
+  12          #if Timer0_EN
+  13            uchar TH0_Reload = 0;
+  14            uchar TL0_Reload = 0;
+  15            #if SNS_NUM
+  16            uint xdata ctk_soft_reset_max_count = 30000;
+  17            #endif
+  18          
+  19            uint xdata sclen_soft_reset_count = 0;
+  20            uint xdata sclen_soft_reset_max_count = 0;
+  21          
+  22          #endif 
+  23          
+  24          #if Timer1_EN
+  25            uchar TH1_Reload = 0;
+  26            uchar TL1_Reload = 0;
+  27          #endif
+  28          
+  29          #if Timer2_EN
+                uchar TH2_Reload = 0;
+                uchar TL2_Reload = 0;
+              #endif
+  33          
+  34          #if Timer3_EN
+                uchar TH3_Reload = 0;
+                uchar TL3_Reload = 0;
+              #endif
+  38          
+  39          
+  40          //-----------------------------------------------------------------//
+  41          //º¯ÊýÃû³Æ£º void Reset_Cnt_Add()
+  42          //º¯Êý¹¦ÄÜ£º CTK/IIC/Íâ²¿ÖÐ¶Ï³ö´í¼ÆÊýÆ÷ÀÛ¼Óº¯Êý
+  43          //ÊäÈë²ÎÊý£º ÎÞ
+  44          //Êä³ö²ÎÊý£º ÎÞ
+  45          //·µ »Ø Öµ£º ÎÞ
+  46          //-----------------------------------------------------------------//
+  47          #if Timer0_EN
+  48            #if SNS_NUM
+  49            void Reset_Cnt_Add()
+  50            {
+  51   1            ctk_soft_reset_count++;
+  52   1        
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 2   
+
+  53   1            if(ctk_soft_reset_count >= ctk_soft_reset_max_count)
+  54   1            {
+  55   2              ctk_soft_reset_count = 0;
+  56   2              SOFT_RST = 0x55;
+  57   2            }
+  58   1        }
+  59            #endif
+  60          #endif
+  61          
+  62          //-----------------------------------------------------------------//
+  63          //º¯ÊýÃû³Æ£º void Set_SCLEN(void)
+  64          //º¯Êý¹¦ÄÜ£º ¼ÆÊýÅÐ¶Ï»Ö¸´SCLEN£¬¶¨Ê±Æ÷0¿ªÆôÓÐÐ§£¬½¨Òé¶¨Ê±Ê±¼äÉèÖÃÎª1Ms
+  65          //ÊäÈë²ÎÊý£º ÎÞ
+  66          //Êä³ö²ÎÊý£º ÎÞ
+  67          //·µ »Ø Öµ£º ÎÞ
+  68          //-----------------------------------------------------------------//
+  69          #if Timer0_EN
+  70            #ifdef IICS_EN
+                #if IICS_EN
+                  void Set_SCLEN(void)
+                  {
+                  
+                      if(SCLEN == 0)
+                      {
+                        sclen_soft_reset_count++;//SCLENÎ´ÊÍ·Å¼ÆÊý
+                        if(sclen_soft_reset_count >= sclen_soft_reset_max_count)
+                        {
+                          SCLEN_SET;
+                          sclen_soft_reset_count = 0;             
+                        }         
+                      }
+                      else
+                      {
+                        sclen_soft_reset_count = 0; 
+                      } 
+                  }
+                #endif
+                #endif
+  91          #endif
+  92          
+  93          
+  94          //-----------------------------------------------------------------//
+  95          //º¯ÊýÃû³Æ£º void Timer0_Init(uint Timer0Us)
+  96          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷0³õÊ¼»¯,¸ù¾ÝÊµ¼ÊÓ¦ÓÃÅäÖÃ³õÊ¼»¯
+  97          //ÊäÈë²ÎÊý£º ÎÞ 
+  98          //Êä³ö²ÎÊý£º ÎÞ
+  99          //·µ »Ø Öµ£º ÎÞ
+ 100          //-----------------------------------------------------------------//
+ 101          #if Timer0_EN
+ 102          
+ 103            #pragma message "±àÒë£¬void Timer0_Init(uint Timer0Us)º¯Êý"
+*** MESSAGE C286 IN LINE 103 OF BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_API_Lib\BF7615BMXX_XXXX_API_Timer.c: ±àÒë£¬void 
+             -Timer0_Init(uint Timer0Us)º¯Ê
+ 104            void Timer0_Init(uint Timer0Us)
+ 105            {
+ 106   1          EA = 0;//¹Ø×ÜÖÐ¶Ï£»
+ 107   1          TH0 = 0;
+ 108   1          TL0 = 0;
+ 109   1          T0_IP_SET;//ÉèÖÃTimer0ÖÐ¶ÏÓÅ¼¶£¬¸ù¾ÝÊµ¼ÊÓ¦ÓÃÅäÖÃ
+ 110   1          T0_INT_FLAG_CLR;//Çå³ýTimer0ÖÐ¶Ï±êÖ¾
+ 111   1          T0_CT_MODE(0); //Timer0¶¨Ê±/¼ÆÊýÄ£Ê½Ñ¡Ôñ0Îª¶¨Ê±Ä£Ê½£¬1Îª¼ÆÊýÄ£Ê½
+ 112   1          T0_MODE_SET(1); //Timer0¶¨Ê±Ä£Ê½Ñ¡Ôñ£º0£º13bit¶¨Ê±»ò¼ÆÊýÄ£Ê½£¬1£º16bit¶¨Ê±£¬2£º8bit×Ô¶¯ÖØÔØÄ£Ê½¶¨Ê±»ò¼ÆÊ
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 3   
+
+             -ýÄ£Ê½£¬3£º8bit¶¨Ê±»ò¼ÆÊýºÍ8bit¶¨Ê±Ä£Ê½ tiemr0_clk=(1/12)*sys_clk
+ 113   1          
+ 114   1          TH0_Reload = (65536 - ((uint)((Timer0Us*1.0)*((SYS_CLK_FRE*1.0)/12.0))))>>8;
+ 115   1          TL0_Reload = (65536 - ((uint)((Timer0Us*1.0)*((SYS_CLK_FRE*1.0)/12.0))));
+ 116   1          TH0 = TH0_Reload; 
+ 117   1          TL0 = TL0_Reload;
+ 118   1          
+ 119   1          // //¶¨Ê±125us
+ 120   1          // TH0 = 0x83;//256-125;//256(us)-125(us);//(1/12)SYS_CLK(12MHz)
+ 121   1          // TL0 = 0x83;//256-125;
+ 122   1          
+ 123   1          #if SNS_NUM
+ 124   1            ctk_soft_reset_max_count = (500000 / Timer0Us);//¼ÆËã¶¨Ê±500msµÄ´ÎÊý
+ 125   1          #endif
+ 126   1          
+ 127   1          
+ 128   1          #ifdef IICS_EN
+                    #if IICS_EN
+                    sclen_soft_reset_max_count = (500000 / Timer0Us);//¼ÆËã¶¨Ê±500msµÄ´ÎÊý
+                    #endif
+                  #endif
+ 133   1          
+ 134   1          #ifdef IDLE_MODE
+ 135   1            #if IDLE_MODE
+                    Idle_Time_Count =  (1000 / Timer0Us);//¼ÆËã¶¨Ê±1msµÄ´ÎÊý
+                    #endif
+ 138   1          #endif
+ 139   1          
+ 140   1          #ifdef ADC_IS_OPEN
+                    #if ADC_IS_OPEN
+                      #if ADC_MODE
+                      ADC_Rest_Max_Count = (100000 / Timer0Us);//¼ÆËã¶¨Ê±100msµÄ´ÎÊý
+                      #endif
+                    #endif
+                  #endif
+ 147   1      
+ 148   1      
+ 149   1          T0_IE_SET;//Ê¹ÄÜTimer0ÖÐ¶Ï 
+ 150   1          T0_RUN;//¿ªÆôTimer0
+ 151   1          EA = 1;//¿ª×ÜÖÐ¶Ï
+ 152   1          
+ 153   1        }
+ 154          //-----------------------------------------------------------------//
+ 155          //º¯ÊýÃû³Æ£º void Timer0_ISR() interrupt 1
+ 156          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷0ÖÐ¶Ï×Óº¯Êý
+ 157          //ÊäÈë²ÎÊý£º ÎÞ
+ 158          //Êä³ö²ÎÊý£º ÎÞ
+ 159          //·µ »Ø Öµ£º ÎÞ
+ 160          //-----------------------------------------------------------------//
+ 161          void Timer0_ISR() interrupt 1
+ 162          {
+ 163   1        uint8 i;
+ 164   1      
+ 165   1        /*100 us*/
+ 166   1        static uchar xdata addr_bak = 0;
+ 167   1        PUSH_REG_ADDR_SFR();
+ 168   1        
+ 169   1        TH0 = TH0 + TH0_Reload; 
+ 170   1        TL0 = TL0 + TL0_Reload;//·Ç×Ô¶¯ÖØÔØÄ£Ê½
+ 171   1      
+ 172   1        T0_INT_FLAG_CLR;//Çå³ýTimer0ÖÐ¶Ï±êÖ¾
+ 173   1      
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 4   
+
+ 174   1      //  SysTime1ms();
+ 175   1      
+ 176   1      //  for(; i < NUM_AREAS; i++){
+ 177   1      
+ 178   1          Led_100usPool(0 , 0);
+ 179   1      
+ 180   1      //  }
+ 181   1      
+ 182   1        
+ 183   1      
+ 184   1      
+ 185   1      //  SM16xx_WriteAll();
+ 186   1      
+ 187   1      //  Test =~Test;
+ 188   1      
+ 189   1        
+ 190   1      
+ 191   1        
+ 192   1      
+ 193   1      //  g_View.PowerOn = ~g_View.PowerOn;
+ 194   1      
+ 195   1        #if SNS_NUM
+ 196   1            Reset_Cnt_Add();
+ 197   1            if((keys_flag_l != 0)||(keys_flag_h != 0))
+ 198   1            {
+ 199   2              long_key_clear_count++; 
+ 200   2            }
+ 201   1            else
+ 202   1            {
+ 203   2              long_key_clear_count = 0;
+ 204   2            }
+ 205   1        #endif
+ 206   1        
+ 207   1          #ifdef IICS_EN
+                    #if IICS_EN
+                      Set_SCLEN();
+                    #endif
+                  #endif
+ 212   1      
+ 213   1          #ifdef ADC_IS_OPEN
+                    #if ADC_IS_OPEN
+                      #if ADC_MODE
+                        ADC_Reset_Count();
+                      #endif
+                    #endif
+                  #endif
+ 220   1      
+ 221   1          #ifdef IDLE_MODE
+ 222   1            #if IDLE_MODE
+                      if((keys_flag_l == 0) && ((keys_flag_h == 0)))
+                      {
+                        if(Idle_Flag == 0)
+                        {
+                          Idle_Time_Count1++;
+                          
+                          if(Idle_Time_Count1 >= Idle_Time_Count)
+                          {
+                            Idle_Time_Count1 = 0;
+                            Idle_Wait_Count++;
+                            if(Idle_Wait_Count > (Step_In_Idle_Time-50))
+                            {             
+                                parallel_mode = 1;              
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 5   
+
+                            }
+                            if(Idle_Wait_Count > Step_In_Idle_Time)
+                            {
+                              
+                              Idle_Wait_Count = 0;
+                              Idle_Flag = 1;
+                                                          
+                            }
+                          }
+                        }
+                        else
+                        {
+                            
+                        }
+                      }
+                      else
+                      {
+                        Idle_Flag = 0;
+                        Idle_Time_Count1 = 0;
+                        Idle_Wait_Count = 0;
+                      }
+                    #endif
+ 258   1          #endif
+ 259   1          
+ 260   1          #ifdef VolDet_EN        
+ 261   1            #if(VolDet_EN == 1)
+ 262   1        
+ 263   1              if(Low_Volotage_Flag == 1)
+ 264   1              {
+ 265   2                if(Low_Volotage_Flag_Count < 10000)
+ 266   2                {
+ 267   3                  Low_Volotage_Flag_Count++;
+ 268   3                  if(Low_Volotage_Flag_Count >= VolDet_COUNT)//VolDet_COUNT*(timer0¶¨Ê±)
+ 269   3                  {
+ 270   4                    Low_Volotage_Flag_Count = 0;
+ 271   4                    Low_Volotage_Flag = 0;
+ 272   4                    Low_Volotage_Flag_Confirm = 1;//VolDet_COUNT*(timer0¶¨Ê±)
+ 273   4                  }
+ 274   3                } 
+ 275   2              }
+ 276   1              if(Low_Volotage_Flag_Confirm == 1)
+ 277   1              {
+ 278   2                Low_Volotage_Flag_Confirm_count++;
+ 279   2                if(Low_Volotage_Flag_Confirm_count >= 30000)//Èô¶¨Ê±Æ÷¶¨Ê±Îª1ms£¬30000¶ÔÓ¦30s¼ÆÊýÇåÁã£¬Low_Volotage_F
+             -lag_ConfirmÇå0£¬¸ù¾ÝÊµ¼ÊÏîÄ¿µ÷ÊÔ
+ 280   2                {
+ 281   3                  Low_Volotage_Flag_Confirm_count = 0;
+ 282   3                  Low_Volotage_Flag_Confirm = 0;
+ 283   3                }
+ 284   2              }
+ 285   1            #endif
+ 286   1          #endif
+ 287   1          POP_REG_ADDR_SFR();
+ 288   1      }
+ 289          #endif
+ 290          
+ 291          //-----------------------------------------------------------------//
+ 292          //º¯ÊýÃû³Æ£º void Timer1_Init(uint Timer1Us)
+ 293          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷0³õÊ¼»¯
+ 294          //ÊäÈë²ÎÊý£º uint Timer1Us:¶¨Ê±Timer1Us usÊ±¼ä£¬Timer1UsÈ¡Öµ·¶Î§1~10000 
+ 295          //Êä³ö²ÎÊý£º ÎÞ
+ 296          //·µ »Ø Öµ£º ÎÞ
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 6   
+
+ 297          //-----------------------------------------------------------------//
+ 298          #if ((Timer1_EN == 1))
+ 299          #pragma message "±àÒë£¬void Timer1_Init(uint Timer1Us)º¯Êý"
+*** MESSAGE C286 IN LINE 299 OF BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_API_Lib\BF7615BMXX_XXXX_API_Timer.c: ±àÒë£¬void 
+             -Timer1_Init(uint Timer1Us)º¯Ê
+ 300          void Timer1_Init(uint Timer1Us)
+ 301          {
+ 302   1        EA = 0;//¹Ø×ÜÖÐ¶Ï£»
+ 303   1        T1_IP_CLR;//ÉèÖÃTimer1ÖÐ¶ÏÓÅ¼¶Îª¸ß£¬¸ù¾ÝÊµ¼ÊÓ¦ÔËÉèÖÃÓÅÏÈ¼¶
+ 304   1        T1_INT_FLAG_CLR;//Çå³ýTimer1ÖÐ¶Ï±êÖ¾
+ 305   1        T1_CT_MODE(0); //Timer1¶¨Ê±/¼ÆÊýÄ£Ê½Ñ¡Ôñ0Îª¶¨Ê±Ä£Ê½£¬1Îª¼ÆÊýÄ£Ê½
+ 306   1        T1_MODE_SET(1); //ÉèÖÃÎª16Î»¼ÆËãÆ÷£¬tiemr1_clk=(1/12)*sys_clk
+ 307   1      
+ 308   1        TH1_Reload = (65536 - ((uint)((Timer1Us*1.0)*((SYS_CLK_FRE*1.0)/12.0))))>>8;
+ 309   1        TL1_Reload = (65536 - ((uint)((Timer1Us*1.0)*((SYS_CLK_FRE*1.0)/12.0))));
+ 310   1          
+ 311   1        TH1 = TH1_Reload; 
+ 312   1        TL1 = TL1_Reload;
+ 313   1      
+ 314   1        T1_IE_SET;//¿ªTimer1ÖÐ¶ÏÊ¹ÄÜ 
+ 315   1        T1_RUN;//¿ªÆôTimer1
+ 316   1        EA = 1;//¿ª×ÜÖÐ¶Ï   
+ 317   1      }
+ 318          //-----------------------------------------------------------------//
+ 319          //º¯ÊýÃû³Æ£º void Timer1_ISR() interrupt 3
+ 320          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷1ÖÐ¶Ï×Óº¯Êý
+ 321          //ÊäÈë²ÎÊý£º ÎÞ
+ 322          //Êä³ö²ÎÊý£º ÎÞ
+ 323          //·µ »Ø Öµ£º ÎÞ
+ 324          //-----------------------------------------------------------------//
+ 325          void Timer1_ISR() interrupt 3
+ 326          { 
+ 327   1        static uchar xdata addr_bak = 0;
+ 328   1        PUSH_REG_ADDR_SFR();
+ 329   1        T1_INT_FLAG_CLR;//Çå³ýTimer1ÖÐ¶Ï±êÖ¾
+ 330   1        TH1 = TH1_Reload;   
+ 331   1        TL1 = TL1_Reload; 
+ 332   1      
+ 333   1      //  g_View.PowerOn = ~g_View.PowerOn;
+ 334   1      
+ 335   1      //  SysTime1ms();
+ 336   1      
+ 337   1        Time_Basic();
+ 338   1      
+ 339   1      //  g_SysHardware.SysTime100us = SET;
+ 340   1      
+ 341   1        POP_REG_ADDR_SFR();
+ 342   1      } 
+ 343          #endif
+ 344          
+ 345          
+ 346          
+ 347          //-----------------------------------------------------------------//
+ 348          //º¯ÊýÃû³Æ£º void Timer2_Init(unsigned int Timer2Ms)
+ 349          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷2³õÊ¼»¯
+ 350          //ÊäÈë²ÎÊý£º unsigned int Timer2Ms:¶¨Ê±imsÊ±¼ä£¬iÈ¡Öµ·¶Î§1~1999;,bit timer2_clk_sel:Ê±ÖÓÔ´Ñ¡Ôñ£º0£ºÄÚ²¿RC3
+             -2.7KHz£¬1£ºÍâ²¿¾§Õñ32768Hz
+ 351          //Êä³ö²ÎÊý£º ÎÞ
+ 352          //·µ »Ø Öµ£º ÎÞ
+ 353          //-----------------------------------------------------------------//
+ 354          #if Timer2_EN
+              
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 7   
+
+                #pragma message "±àÒë£¬void Timer2_Init(uint Timer2Ms,bit timer2_clk_sel)º¯Êý"
+                void Timer2_Init(unsigned int Timer2Ms,bit timer2_clk_sel)
+                {
+                  unsigned int data dat;
+                      
+                  EA = 0;//¹Ø×ÜÖÐ¶Ï£»
+                  
+                  T2_IP_SET;//ÉèÖÃTimer1ÖÐ¶ÏÓÅ¼¶Îª¸ß£¬¸ù¾ÝÊµ¼ÊÓ¦ÔËÉèÖÃÓÅÏÈ¼¶
+                  T2_INT_FLAG_CLR;//Çå³ýTimer2ÖÐ¶Ï±êÖ¾
+                  T2_STOP;//bit0Îª0Ê±Í£Ö¹¼ÆÊ±£¬bit0Îª1Ê±¿ªÆô¼ÆÊ±
+                  dat = (Timer2Ms * 32.768)-1;//ÄÚ²¿RC32.7KHz
+                  TIMER2_SET_H = (dat / 256);//ÉèÖÃTimer2¶¨Ê±³õÖµ¸ß8Î»
+                  TIMER2_SET_L = (dat % 256);//ÉèÖÃTimer2¶¨Ê±³õÖµµÍ8Î»
+                  T2_CNT_MODE_SET(0);//Timer2¶¨Ê±²½½øÄ£Ê½Ñ¡Ôñ£º0£ºÒ»¸öÊ±ÖÓ²½½ø£¬1£º65536¸öÊ±ÖÓ²½½ø
+                  T2_MODE_SET(1);//bit1Îª0Ê±ÊÖ¶¯ÖØÔØÄ£Ê½£¬bit[1] 1ÎªÊ±×Ô¶¯ÖØÔØÄ£Ê½  
+                  
+                  if (timer2_clk_sel == 0)//0ÎªÄÚ²¿RC32K
+                  {
+                    T2_XTAL_SET(1);//Timer2 Íâ²¿¾§Õñ¿ª¹Ø,1Îª¹Ø£¬0Îª¿ª
+                    T2_CLK_SET(0);//Timer2¶¨Ê±Ê±ÖÓÑ¡Ôñ£º0£ºÄÚ²¿RC32.7KHz£¬1£ºÍâ²¿¾§Õñ32768Hz
+                  }
+                  else//1ÎªÍâ²¿¾§Õñ32768Hz
+                  {
+                    TRISA |= 0x0C;
+                    T2_XTAL_SET(0);//Timer2 Íâ²¿¾§Õñ¿ª¹Ø,1Îª¹Ø£¬0Îª¿ª
+                    T2_CLK_SET(1);//Timer2¶¨Ê±Ê±ÖÓÑ¡Ôñ£º0£ºÄÚ²¿RC32.7KHz£¬1£ºÍâ²¿¾§Õñ32768Hz
+                  }
+                  
+              
+                  T2_IE_SET;//¿ªÆôTimer2ÖÐ¶ÏÊ¹ÄÜ
+                  T2_RUN;//¿ªÆôTimer2
+                  EA = 1;//¿ª×ÜÖÐ¶Ï 
+                
+                }
+                #endif
+ 391          //-----------------------------------------------------------------//
+ 392          //º¯ÊýÃû³Æ£º void Timer2_WDT_ISR() interrupt 14
+ 393          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷0ÖÐ¶Ï×Óº¯Êý
+ 394          //ÊäÈë²ÎÊý£º ÎÞ
+ 395          //Êä³ö²ÎÊý£º ÎÞ
+ 396          //·µ »Ø Öµ£º ÎÞ
+ 397          //-----------------------------------------------------------------//
+ 398          void Timer2_WDT_ISR() interrupt 14
+ 399          {
+ 400   1        static uchar xdata addr_bak = 0;
+ 401   1        PUSH_REG_ADDR_SFR();
+ 402   1        T2_INT_FLAG_CLR;//Çå³ýTimer2ÖÐ¶Ï±êÖ¾
+ 403   1      
+ 404   1        
+ 405   1        
+ 406   1        POP_REG_ADDR_SFR();
+ 407   1      }
+ 408          
+ 409          
+ 410          //-----------------------------------------------------------------//
+ 411          //º¯ÊýÃû³Æ£º void Timer3_Init(uint Timer3Us,bit timer3_clk_div)
+ 412          //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷0³õÊ¼»¯
+ 413          //ÊäÈë²ÎÊý£º uint Timer3Us:¶¨Ê±Timer3Us usÊ±¼ä£¬Timer3UsÈ¡Öµ·¶Î§1~10000;bit timer3_clk_div: 0£º24MHz/12£¬1
+             -£º24MHz/4
+ 414          //Êä³ö²ÎÊý£º ÎÞ
+ 415          //·µ »Ø Öµ£º ÎÞ
+ 416          //-----------------------------------------------------------------//
+C51 COMPILER V9.60.7.0   BF7615BMXX_XXXX_API_TIMER                                         04/23/2024 20:16:28 PAGE 8   
+
+ 417          #if ((Timer3_EN == 1))
+              #pragma message "±àÒë£¬void Timer3_Init(uint Timer3Us,bit timer3_clk_div)º¯Êý"
+              void Timer3_Init(uint Timer3Us,bit timer3_clk_div)
+              {
+                EA = 0;//¹Ø×ÜÖÐ¶Ï£»
+                T3_IP_SET;//ÉèÖÃTimer1ÖÐ¶ÏÓÅ¼¶Îª¸ß£¬¸ù¾ÝÊµ¼ÊÓ¦ÔËÉèÖÃÓÅÏÈ¼¶
+                T3_INT_FLAG_CLR;//Çå³ýTimer1ÖÐ¶Ï±êÖ¾
+                T3_CLK_DIV_SET((uchar)timer3_clk_div);//Timer3¶¨Ê±Ê±ÖÓ·ÖÆµÑ¡Ôñ£º0£º24MHz/12£¬1£º24MHz/4
+                T3_MODE_SET(1); //Timer3¶¨Ê±Ä£Ê½Ñ¡Ôñ£º0£ºÊÖ¶¯ÖØÔØÄ£Ê½£¬1£º1×Ô¶¯ÖØÔØÄ£Ê½
+                if(timer3_clk_div == 0)
+                {
+              
+                  TH3_Reload = ((uint)((Timer3Us*1.0)*((2.0))))>>8;
+                  TL3_Reload = ((uint)((Timer3Us*1.0)*((2.0))));
+                    
+                  TIMER3_SET_H = TH3_Reload; 
+                  TIMER3_SET_L = TL3_Reload;
+                  
+                }
+                else
+                {
+                  TH3_Reload = ((uint)((Timer3Us*1.0)*((6.0))))>>8;
+                  TL3_Reload = ((uint)((Timer3Us*1.0)*((6.0))))-1;
+                    
+                  TIMER3_SET_H = TH3_Reload; 
+                  TIMER3_SET_L = TL3_Reload;
+                }
+              
+                T3_IE_SET;//¿ªTimer1ÖÐ¶ÏÊ¹ÄÜ 
+                T3_RUN;//¿ªÆôTimer1
+                EA = 1;//¿ª×ÜÖÐ¶Ï   
+              }
+              //-----------------------------------------------------------------//
+              //º¯ÊýÃû³Æ£º void Timer3_ISR() interrupt 19
+              //º¯Êý¹¦ÄÜ£º ¶¨Ê±Æ÷1ÖÐ¶Ï×Óº¯Êý
+              //ÊäÈë²ÎÊý£º ÎÞ
+              //Êä³ö²ÎÊý£º ÎÞ
+              //·µ »Ø Öµ£º ÎÞ
+              //-----------------------------------------------------------------//
+              void Timer3_ISR() interrupt 19
+              { 
+                static uchar xdata addr_bak = 0;
+                PUSH_REG_ADDR_SFR();
+                T3_INT_FLAG_CLR;//Çå³ýTimer1ÖÐ¶Ï±êÖ¾
+              
+                
+                POP_REG_ADDR_SFR();
+              } 
+              #endif
+ 466              
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

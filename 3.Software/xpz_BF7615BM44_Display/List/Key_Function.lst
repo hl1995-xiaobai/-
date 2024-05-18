@@ -1,0 +1,273 @@
+C51 COMPILER V9.60.7.0   KEY_FUNCTION                                                      04/23/2024 20:16:29 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY_FUNCTION
+OBJECT MODULE PLACED IN .\Output\Key_Function.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Hardware\Key_Function.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\App
+                    -lication_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\Key_Function.lst) TABS(2) OBJ
+                    -ECT(.\Output\Key_Function.obj)
+
+line level    source
+
+   1          #include "include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\项目\代码\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          
+   3          #include ".\BF7615BMXX_XXXX_Library\Config.h"
+   4          
+   5          #include "Key_Function.h"
+   6          
+   7          
+   8          
+   9          Key_Struct    KeyData;
+  10          
+  11          //SysDat_Struct xdata SYS_Dat;
+  12          
+  13          
+  14          unsigned char KEY_NUM(unsigned char SCAN_NUM)
+  15          {
+  16   1        unsigned char i = 0;
+  17   1        unsigned char j = 0;
+  18   1        unsigned long DatRS = 0;
+  19   1      
+  20   1        if (SCAN_NUM < 32)
+  21   1          DatRS = keys_flag_l;
+  22   1        else 
+  23   1          DatRS = keys_flag_h;
+  24   1      
+  25   1        j         = SCAN_NUM % 32;
+  26   1      
+  27   1        if ((DatRS >> j) & 0x00000001)
+  28   1          i = 1;
+  29   1        else 
+  30   1          i = 0;
+  31   1      
+  32   1        return i;
+  33   1      }
+  34          
+  35          
+  36          void Get_Key_Code(void) //main 20ms
+  37          {
+  38   1      
+  39   1      #if(0)
+              
+                if((keys_flag_l != 0) || (keys_flag_h != 0))
+                {
+                    if(IsTouch == 0)
+                    {
+                      IsTouch = 1;
+                      //按键处理
+                      if(keys_flag_l == 0x00000001)
+                      {
+                        Key_Data = 0x01;
+                      }
+                    }
+                }
+C51 COMPILER V9.60.7.0   KEY_FUNCTION                                                      04/23/2024 20:16:29 PAGE 2   
+
+                else
+                {
+                    if(IsTouch == 1)
+                    {
+                      IsTouch = 0;
+                    }
+                }
+                
+              #endif  
+  62   1      
+  63   1        KeyData.Key_CodeRS  = 0;
+  64   1      
+  65   1        if (KEY_NUM(SCAN_00))
+  66   1          KeyData.Key_CodeRS |= Key_Num1;
+  67   1      
+  68   1        if (KEY_NUM(SCAN_01))
+  69   1          KeyData.Key_CodeRS |= Key_Num2;
+  70   1      
+  71   1        if (KEY_NUM(SCAN_02))
+  72   1          KeyData.Key_CodeRS |= Key_Num3;
+  73   1      
+  74   1        if (KEY_NUM(SCAN_03))
+  75   1          KeyData.Key_CodeRS |= Key_Num4;
+  76   1      
+  77   1        if (KEY_NUM(SCAN_04))
+  78   1          KeyData.Key_CodeRS |= Key_Num5;
+  79   1      
+  80   1        if (KEY_NUM(SCAN_05))
+  81   1          KeyData.Key_CodeRS |= Key_Num6;
+  82   1      
+  83   1        if (KEY_NUM(SCAN_06))
+  84   1          KeyData.Key_CodeRS |= Key_Num7;
+  85   1      
+  86   1        if (KEY_NUM(SCAN_07))
+  87   1          KeyData.Key_CodeRS |= Key_Num8;
+  88   1      
+  89   1        if (KEY_NUM(SCAN_08))
+  90   1          KeyData.Key_CodeRS |= Key_Num9;
+  91   1      
+  92   1        if (KEY_NUM(SCAN_09))
+  93   1          KeyData.Key_CodeRS |= Key_Num10;
+  94   1      
+  95   1        if (KEY_NUM(SCAN_10))
+  96   1          KeyData.Key_CodeRS |= Key_Num11;
+  97   1      
+  98   1        if (KEY_NUM(SCAN_11))
+  99   1          KeyData.Key_CodeRS |= Key_Num12;
+ 100   1      
+ 101   1        if (KEY_NUM(SCAN_12))
+ 102   1          KeyData.Key_CodeRS |= Key_Num13;
+ 103   1      
+ 104   1      
+ 105   1      #if(0)
+                if (Display_Run.UpPowerFlag){
+                  KeyData.Key_Code = 0;
+                }
+              #endif    
+ 110   1        
+ 111   1      }
+ 112          
+ 113          
+ 114          
+C51 COMPILER V9.60.7.0   KEY_FUNCTION                                                      04/23/2024 20:16:29 PAGE 3   
+
+ 115          void Key_Function_Deal(void)
+ 116          {
+ 117   1        Get_Key_Code();
+ 118   1      
+ 119   1        if (KeyData.Key_CodeRS == KeyData.Key_Code) {
+ 120   2      
+ 121   2          if (KeyData.Key_Code == 0) {
+ 122   3            KeyData.key_long = CLE;
+ 123   3            KeyData.Key_StateCnt = 0;
+ 124   3            return;
+ 125   3          }
+ 126   2      
+ 127   2          if (KeyData.Key_StateCnt < 200)
+ 128   2            KeyData.Key_StateCnt++;
+ 129   2      
+ 130   2      
+ 131   2      //    if (KeyData.Key_StateCnt == 25) {
+ 132   2          if (KeyData.Key_StateCnt == 50) {
+ 133   3            if (KeyData.Key_CodeRS == Key_Num1) {
+ 134   4              
+ 135   4              KeyData.key_long = SET;
+ 136   4              
+ 137   4            }
+ 138   3            
+ 139   3            
+ 140   3            else if (KeyData.Key_CodeRS == Key_Num10) { 
+ 141   4              
+ 142   4              KeyData.Key_StateCnt = 20;
+ 143   4              KeyData.key_long = SET;
+ 144   4            }
+ 145   3      
+ 146   3            else if (KeyData.Key_CodeRS == Key_Num11) { 
+ 147   4              
+ 148   4              KeyData.Key_StateCnt = 20;
+ 149   4              KeyData.key_long = SET;
+ 150   4            }
+ 151   3            
+ 152   3          }
+ 153   2      
+ 154   2        }
+ 155   1        else {
+ 156   2      
+ 157   2          if((KeyData.Key_Code == 0) && (KeyData.Key_CodeRS != 0)){
+ 158   3            // 按键被按下
+ 159   3            
+ 160   3          }
+ 161   2      
+ 162   2          else if((KeyData.Key_Code != 0) && (KeyData.Key_CodeRS == 0)){
+ 163   3            // 按键被抬起
+ 164   3            if(KeyData.Key_StateCnt < 5){
+ 165   4              switch (KeyData.Key_CodeRS)
+ 166   4              {
+ 167   5                case Key_Num1:
+ 168   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 169   5                  break;
+ 170   5      
+ 171   5                case Key_Num2:
+ 172   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 173   5                  break;
+ 174   5      
+ 175   5                case Key_Num3:
+ 176   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+C51 COMPILER V9.60.7.0   KEY_FUNCTION                                                      04/23/2024 20:16:29 PAGE 4   
+
+ 177   5                  break;
+ 178   5      
+ 179   5                case Key_Num4:
+ 180   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 181   5                  break;
+ 182   5      
+ 183   5                case Key_Num5:
+ 184   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 185   5                  break;
+ 186   5      
+ 187   5                case Key_Num6:
+ 188   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 189   5                  break;
+ 190   5      
+ 191   5                case Key_Num7:
+ 192   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 193   5                  break;
+ 194   5      
+ 195   5                case Key_Num8:
+ 196   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 197   5                  break;
+ 198   5      
+ 199   5                case Key_Num9:
+ 200   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 201   5                  break;
+ 202   5      
+ 203   5                case Key_Num10:
+ 204   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 205   5                  break;
+ 206   5      
+ 207   5                case Key_Num11:
+ 208   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 209   5                  break;
+ 210   5      
+ 211   5                case Key_Num12:
+ 212   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 213   5                  break;
+ 214   5      
+ 215   5                case Key_Num13:
+ 216   5                  KeyData.Key_CodeRS = KeyData.Key_CodeRS;
+ 217   5                  break;
+ 218   5      
+ 219   5                
+ 220   5      
+ 221   5                default:
+ 222   5                  break;
+ 223   5              }
+ 224   4            }
+ 225   3          }
+ 226   2      
+ 227   2          else if(KeyData.Key_StateCnt > 50){
+ 228   3            // 长按抬起
+ 229   3            
+ 230   3            
+ 231   3          }
+ 232   2        
+ 233   2          
+ 234   2      
+ 235   2          KeyData.Key_Code    = KeyData.Key_CodeRS;
+ 236   2          KeyData.Key_StateCnt  = 0;
+ 237   2          KeyData.key_long    = CLE;
+ 238   2          g_View.FlashOn      = CLE;
+C51 COMPILER V9.60.7.0   KEY_FUNCTION                                                      04/23/2024 20:16:29 PAGE 5   
+
+ 239   2        }
+ 240   1      
+ 241   1      }
+ 242          
+ 243          
+ 244          
+ 245          
+ 246          
+ 247          
+ 248          
+ 249          
+ 250          
+ 251          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

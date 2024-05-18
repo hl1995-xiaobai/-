@@ -1,0 +1,1 @@
+"Hardware\SM16306SJ.c" LARGE OMF2 OPTIMIZE (3,SPEED) BROWSE INCDIR(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\SM16306SJ.lst) TABS (2) OBJECT(.\Output\SM16306SJ.obj)

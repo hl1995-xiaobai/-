@@ -1,0 +1,58 @@
+C51 COMPILER V9.60.7.0   VIEW                                                              04/23/2024 20:16:29 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE VIEW
+OBJECT MODULE PLACED IN .\Output\View.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Code\View.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Application_Lib
+                    -rary;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\View.lst) TABS(2) OBJECT(.\Output\View.ob
+                    -j)
+
+line level    source
+
+   1          #include "include.h"    
+*** ERROR C141 IN LINE 10 OF Code\crc.h: syntax error near ',', expected '<id>'
+   2          #include "View.h"       
+   3          
+   4          volatile SYS_HARDWARE_T g_SysHardware;    // È«¾Ö±äÁ¿£¬´æ´¢ÏµÍ³Ó²¼þÐÅÏ¢£¬Ò×±äµÄ£¬¿ÉÄÜ»á±»ÖÐ¶Ï»òÆäËûÏß³ÌÐÞ¸
+             -Ä
+   5          volatile SYS_TIME_CNT_T g_sysTimeCnt;     // È«¾Ö±äÁ¿£¬´æ´¢ÏµÍ³Ê±¼ä¼ÆÊýÆ÷ÐÅÏ¢£¬Ò×±äµÄ£¬¿ÉÄÜ»á±»ÖÐ¶Ï»òÆäËûÏ
+             -ß³ÌÐÞ¸Ä
+   6          volatile VIEW_T g_View;                   // È«¾Ö±äÁ¿£¬´æ´¢ÊÓÍ¼ÐÅÏ¢£¬Ò×±äµÄ£¬¿ÉÄÜ»á±»ÖÐ¶Ï»òÆäËûÏß³ÌÐÞ¸Ä
+   7          xdata const PSM16106_T pSM16106 = (PSM16106_T)(&r_SM16106);
+   8          volatile DISPLAY_LED_T      g_DisplayLed;
+   9          volatile CONFIG_T g_config;                 // È«¾Ö±äÁ¿£¬´æ´¢ÅäÖÃÐÅÏ¢£¬Ò×±äµÄ£¬¿ÉÄÜ»á±»ÖÐ¶Ï»òÆäËûÏß³ÌÐÞ¸Ä
+  10          
+  11          
+  12          // º¯Êý htons: ½«16Î»ÕûÊýµÄ×Ö½ÚÐò´ÓÖ÷»ú×Ö½ÚÐò×ª»»ÎªÍøÂç×Ö½ÚÐò£¨´ó¶Ë×Ö½ÚÐò£©
+  13          // ²ÎÊý v: ´ý×ª»»µÄ16Î»ÕûÊý
+  14          // ·µ»ØÖµ: ×ª»»ºóµÄ16Î»ÕûÊý
+  15          uint16 htons(uint16 v){
+  16   1          return ((v>>8) | (v<<8));                         // ¸ß8Î»ºÍµÍ8Î»½»»»Î»ÖÃ
+  17   1      }
+  18          
+  19          
+  20          // º¯Êý htonl: ½«32Î»ÕûÊýµÄ×Ö½ÚÐò´ÓÖ÷»ú×Ö½ÚÐò×ª»»ÎªÍøÂç×Ö½ÚÐò£¨´ó¶Ë×Ö½ÚÐò£©
+  21          // ²ÎÊý v: ´ý×ª»»µÄ32Î»ÕûÊý
+  22          // ·µ»ØÖµ: ×ª»»ºóµÄ32Î»ÕûÊý
+  23          uint32 htonl(uint32 v){
+  24   1          return ((((v) & 0xff000000u) >> 24) | (((v) & 0x00ff0000u) >>  8) | 
+  25   1                  (((v) & 0x0000ff00u) <<  8) | (((v) & 0x000000ffu) << 24));   // ×Ö½ÚÎ»ÖÃ»¥»»
+  26   1      }
+  27          
+  28          
+  29          // º¯Êý Checkout: ¼ÆËã×Ö½ÚÊý×éµÄÐ£ÑéºÍ
+  30          // ²ÎÊý in: ´ý¼ÆËãÐ£ÑéºÍµÄ×Ö½ÚÊý×é
+  31          // ²ÎÊý size: ×Ö½ÚÊý×éµÄ´óÐ¡
+  32          // ·µ»ØÖµ: ×Ö½ÚÊý×éµÄÐ£ÑéºÍ
+  33          uint8 Checkout(uint8* in, uint8 size){
+  34   1          uint8 ret = 0;                                // ³õÊ¼»¯Ð£ÑéºÍÎª0
+  35   1      
+  36   1          // ±éÀú×Ö½ÚÊý×é£¬ÀÛ¼ÓÃ¿¸ö×Ö½ÚµÄÖµµ½Ð£ÑéºÍ
+  37   1          while(size--){
+  38   2              ret += in[size];                            // ÀÛ¼ÓÃ¿¸ö×Ö½ÚµÄÖµµ½Ð£ÑéºÍ
+  39   2          }
+  40   1          
+  41   1          return ret;                                 // ·µ»Ø¼ÆËãµÃµ½µÄÐ£ÑéºÍ
+  42   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

@@ -1,0 +1,1 @@
+"Hardware\Led.c" LARGE OMF2 OPTIMIZE (3,SPEED) BROWSE INCDIR(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\Led.lst) TABS (2) OBJECT(.\Output\Led.obj)

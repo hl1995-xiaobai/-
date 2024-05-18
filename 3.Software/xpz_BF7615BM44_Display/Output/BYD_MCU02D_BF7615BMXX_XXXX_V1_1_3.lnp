@@ -1,0 +1,24 @@
+".\Output\STARTUP.obj",
+".\Output\Project.obj",
+".\Output\Touch_MCU_Init.obj",
+".\Output\Config.obj",
+".\Output\main.obj",
+".\Output\BF7615BMXX_XXXX_API_Timer.obj",
+".\Output\BF7615BMXX_XXXX_API_LVDT.obj",
+".\Output\BF7615BMXX_XXXX_API_UART.obj",
+".\Output\BF7615BMXX_XXXX_CTK.obj",
+".\Output\BF7615BMXX_XXXX_CTK_Touch.obj",
+".\Output\BF7615BMXX_XXXX_CTK_Trace.obj",
+".\BF7615BMXX_XXXX_Library\BF7615BMXX_XXXX_CTK_Lib\BF7615BMXX_XXXX_CS_DataDeal_V1_0_0.LIB",
+".\Output\BF7615BMXX_XXXX_CTK_Idle.obj",
+".\Output\View.obj",
+".\Output\Cmd.obj",
+".\Output\SysTime.obj",
+".\Output\SM16306SJ.obj",
+".\Output\Key_Function.obj",
+".\Output\Led.obj",
+".\Output\Display_Function.obj" 
+TO ".\Output\BYD_MCU02D_BF7615BMXX_XXXX_V1_1_3" 
+
+PRINT(".\List\BYD_MCU02D_BF7615BMXX_XXXX_V1_1_3.map") DISABLEWARNING (16) 
+REMOVEUNUSED 

@@ -1,0 +1,64 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              04/23/2024 20:16:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Output\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE BF7615BMXX_XXXX_Library\main.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDI
+                    -R(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\main.lst) TABS(2) OBJE
+                    -CT(.\Output\main.obj)
+
+line level    source
+
+   1          #include "include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\项目\代码\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          
+   3          #include ".\BF7615BMXX_XXXX_Library\Config.h"
+   4          
+   5          
+   6          
+   7          
+   8          void main(void)
+   9          {
+  10   1        //MCU_Init()初始化函数
+  11   1        MCU_Init();
+  12   1      
+  13   1        g_View.VersionNumber = HOST_FIRMWARE_VERSION_NUMBER;
+  14   1          
+  15   1        Led_init();
+  16   1        SM16xx_Init();
+  17   1        CmdInit();
+  18   1      
+  19   1        UART1_BUF = 0x5A;
+  20   1        
+  21   1        while(1)
+  22   1        {
+  23   2          //清看门狗。
+  24   2          WDT_CTRL = 7;
+  25   2          
+  26   2      #if(1)    
+  27   2          if(Low_Volotage_Flag_Confirm == 0)//进入低电压中断时，定时VolDet_COUNT*(timer0定时)后确认为低电压Low_Vol
+             -otage_Flag_Confirm = 1
+  28   2          {
+  29   3            //获取按键标志位
+  30   3            BF7615BMXX_XXXX_Set_Touch_Flag();
+  31   3          }
+  32   2      #endif    
+  33   2          
+  34   2          //建议将项目功能函数定义在Project.c中或新建c文件。
+  35   2          Project();
+  36   2      
+  37   2      #if(0)
+                  if(g_View.PowerOn){
+                    SET_PB6_H;
+                  }else{
+                    SET_PB6_L;
+                  }
+              #endif
+  44   2      //    m_LedData.LedCom++;
+  45   2      //    if(m_LedData.LedCom >= 20) m_LedData.LedCom = 0;
+  46   2      
+  47   2          
+  48   2        }     
+  49   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

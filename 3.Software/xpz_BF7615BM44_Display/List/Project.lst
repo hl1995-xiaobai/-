@@ -1,0 +1,405 @@
+C51 COMPILER V9.60.7.0   PROJECT                                                           04/23/2024 20:16:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE PROJECT
+OBJECT MODULE PLACED IN .\Output\Project.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Project\Project.c LARGE OMF2 OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Applicati
+                    -on_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\Project.lst) TABS(2) OBJECT(.\Outpu
+                    -t\Project.obj)
+
+line level    source
+
+   1          #include "include.h"
+*** ERROR C141 IN LINE 10 OF \git\-\项目\代码\xpz_BF7615BM44_Display\Code\crc.h: syntax error near ',', expected '<id>'
+   2          
+   3          #include ".\BF7615BMXX_XXXX_Library\Config.h"
+   4          /****************************************************************/
+   5          //参考范例：Project.c和Project.h
+   6          /****************************************************************/
+   7          bit IsTouch = 0;
+   8          uchar xdata Key_Data = 0x00;
+   9          
+  10          
+  11            
+  12          /****************************************************************/
+  13          //函数名：void Project(void)
+  14          //功  能：项目项目功能函数
+  15          //参  数：无
+  16          //返回值：无
+  17          /****************************************************************/
+  18          
+  19          #if(0)
+              
+              void Project(void)//范例
+              {
+              #if(0)
+                  if((keys_flag_l != 0) || (keys_flag_h != 0))
+                {
+                    if(IsTouch == 0)
+                    {
+                      IsTouch = 1;
+                      //按键处理
+                      if(keys_flag_l == 0x00000001)
+                      {
+                        Key_Data = 0x01;
+                      }
+                    }
+                }
+                else
+                {
+                    if(IsTouch == 1)
+                    {
+                      IsTouch = 0;
+                    }
+                }
+              #endif
+                if(g_SysHardware.SysCnt > 10){
+              //    g_SysHardware.SysMode = SYSMODE_TEST;
+                }
+                else{
+                  g_SysHardware.SysMode = SYSMODE_NORMAL;
+                }
+                
+                if(g_SysHardware.SysMode == SYSMODE_TEST){
+              //    TestPool(); 
+C51 COMPILER V9.60.7.0   PROJECT                                                           04/23/2024 20:16:28 PAGE 2   
+
+                }
+                else{
+                  
+                  if(g_SysHardware.SysTime1ms == SET){
+                    g_SysHardware.SysTime1ms = CLE;
+                    if(g_SysHardware.sysInit == SET){
+              //        CmdRecvPool();
+              //        SM16xx_WriteAll();
+              
+              #if(0)        
+                      if(Low_Volotage_Flag_Confirm == 0)//进入低电压中断时，定时VolDet_COUNT*(timer0定时)后确认为低电压Low_V
+             -olotage_Flag_Confirm = 1
+                      {
+                        //获取按键标志位
+                        BF7615BMXX_XXXX_Set_Touch_Flag();
+                      }
+              #endif        
+                    
+                    }
+                  }
+              
+                  if(g_SysHardware.SysTime10ms == SET){
+                    g_SysHardware.SysTime10ms = CLE;
+                    SysTime10msPool();
+                    if(g_SysHardware.sysInit == SET){
+              //        Gpio20MsPool();
+              //        ScanKey();
+                      
+                      
+              #if(1)      
+                      if(Low_Volotage_Flag_Confirm == 0)//进入低电压中断时，定时VolDet_COUNT*(timer0定时)后确认为低电压Low_V
+             -olotage_Flag_Confirm = 1
+                      {
+                        //获取按键标志位
+                        BF7615BMXX_XXXX_Set_Touch_Flag();
+                      }
+              #endif      
+                      
+                    }
+                  }
+              
+                  
+                  if(g_SysHardware.SysTime20ms == SET){
+                    g_SysHardware.SysTime20ms = CLE;
+                    SysTime20msPool();
+                    if(g_SysHardware.sysInit == SET){
+              //        Gpio20MsPool();
+                      
+              
+                      Key_Function_Deal();
+              
+                      
+                    }
+                  }
+              
+                  if(g_SysHardware.SysTime100ms == SET){
+                    g_SysHardware.SysTime100ms = CLE;
+                    SysTime100msPool();
+                    
+                    if(g_SysHardware.sysInit == SET){
+              //        SteamOven100msPool();
+              //        RangeHoodDataDispose();
+C51 COMPILER V9.60.7.0   PROJECT                                                           04/23/2024 20:16:28 PAGE 3   
+
+              //        DisplayChangeData();
+              //        TM1629_Driver();
+              //        KeyManage();
+              
+                      
+                    }
+                  }
+              
+                  if(g_SysHardware.SysTime500ms == SET){
+                    g_SysHardware.SysTime500ms = CLE;
+                    SysTime500msPool();
+              
+                    
+              
+                    if(g_SysHardware.sysInit == SET){
+              //        SteamOven500msPool();
+                    }
+                  }
+              
+                  if(g_SysHardware.SysTime1S == SET){
+                    g_SysHardware.SysTime1S = CLE;
+              
+                    if(g_SysHardware.sysInit == CLE) g_SysHardware.sysInit = SET;
+              
+              
+              #if(1)
+                    g_View.PowerOn = ~g_View.PowerOn;
+                    if(g_View.PowerOn){
+                      SET_PB6_H;
+                    }else{
+                      SET_PB6_L;
+                    }
+              #endif
+              
+              #if(0)
+                    if(g_View.SendingState){
+                      g_View.SendingState = CLE;
+                        
+                      UART1_BUF = 0x5A;       
+                    }
+              
+              #endif      
+                    
+              //      SteamOven1sPool();
+              //      RangeHood1sPool();
+                    if(g_SysHardware.SysCnt < 20){
+                      g_SysHardware.SysCnt++;
+                        if(g_SysHardware.SysCnt == 3){
+              #ifdef _DEBUG_WORK
+              //            SysUart0Init();
+              #else
+              //            SysUart1Init();
+              #endif
+                          
+                        }
+                    }
+              
+              
+                  } 
+                } 
+              }
+              
+C51 COMPILER V9.60.7.0   PROJECT                                                           04/23/2024 20:16:28 PAGE 4   
+
+              #endif
+ 176          
+ 177          #if(1)
+ 178          
+ 179          void Project(void)//范例
+ 180          {
+ 181   1        if(g_SysHardware.SysCnt > 10){
+ 182   2      //    g_SysHardware.SysMode = SYSMODE_TEST;
+ 183   2        }
+ 184   1        else{
+ 185   2          g_SysHardware.SysMode = SYSMODE_NORMAL;
+ 186   2        }
+ 187   1        
+ 188   1        if(g_SysHardware.SysMode == SYSMODE_TEST){
+ 189   2      //    TestPool(); 
+ 190   2        }
+ 191   1        else{
+ 192   2      //    DisplayKeyLed();
+ 193   2      
+ 194   2          
+ 195   2      
+ 196   2      #if(0)
+                
+                  if(g_SysHardware.SysTime100us == SET){
+                    g_SysHardware.SysTime100us = CLE;
+                    SysTime100us();
+                    Led_100usPool();
+                  }
+              
+                  if(g_SysHardware.SysTime1ms == SET){
+                    g_SysHardware.SysTime1ms = CLE;
+                    g_View.PowerOn = ~g_View.PowerOn;
+                    if(g_View.PowerOn){
+                      SET_PB6_H;
+                    }else{
+                      SET_PB6_L;
+                    } 
+                  }
+              
+              #endif
+ 215   2      
+ 216   2          if(g_SysHardware.Time_4ms_cnt == 0){
+ 217   3            g_SysHardware.Time_4ms_cnt = 1;
+ 218   3      
+ 219   3      #if(0)
+                    if(Low_Volotage_Flag_Confirm == 0)//进入低电压中断时，定时VolDet_COUNT*(timer0定时)后确认为低电压Low_Vo
+             -lotage_Flag_Confirm = 1
+                    {
+                      //获取按键标志位
+                      BF7615BMXX_XXXX_Set_Touch_Flag();
+                    }
+              #endif
+ 226   3            
+ 227   3      
+ 228   3      //      Key_Function_Deal();
+ 229   3      
+ 230   3            
+ 231   3            
+ 232   3          }
+ 233   2      
+ 234   2          if (g_SysHardware.Time_20ms_cnt == 0) {
+ 235   3            //50ms
+C51 COMPILER V9.60.7.0   PROJECT                                                           04/23/2024 20:16:28 PAGE 5   
+
+ 236   3            g_SysHardware.Time_20ms_cnt = 20;
+ 237   3      
+ 238   3            
+ 239   3            
+ 240   3            Key_Function_Deal();
+ 241   3      //      DisplayKeyLed();
+ 242   3          }
+ 243   2      
+ 244   2      
+ 245   2          if (g_SysHardware.Time_100ms_cnt  == 0) {
+ 246   3            g_SysHardware.Time_100ms_cnt  = 100;
+ 247   3      
+ 248   3            memset(&g_DisplayLed, 0, sizeof(DISPLAY_LED_T));
+ 249   3      
+ 250   3            
+ 251   3      #if(0)      
+                    if(g_View.Flash){
+                      g_DisplayLed.v_f.key_power_led = SET;
+                    }
+              
+              #endif  
+ 257   3      //       (g_DisplayLed.v_f.key_power_led = SET,)
+ 258   3      
+ 259   3      //       (g_DisplayLed.v_f.key_door_led = SET,)
+ 260   3      
+ 261   3             DisplayKeyLed();
+ 262   3      #if(0)
+                    
+                    
+                    
+                    
+                    
+                    g_DisplayLed.v_f.key_A_led = SET;
+              
+                    g_DisplayLed.v_f.key_B_led = SET;
+              
+                    g_DisplayLed.v_f.key_C_led = SET;
+              
+                    g_DisplayLed.v_f.key_D_led = SET;
+              
+                    g_DisplayLed.v_f.key_E_led = SET;
+              
+                    g_DisplayLed.v_f.key_drain_led = SET;
+              
+                    g_DisplayLed.v_f.key_menu_led = SET;
+              
+                    g_DisplayLed.v_f.num1_A_led = SET;
+              
+                    g_DisplayLed.v_f.num1_F_led = SET;
+              
+                    g_DisplayLed.v_f.num1_B_led = SET;
+              
+                    g_DisplayLed.v_f.num1_G_led = SET;
+              
+                    g_DisplayLed.v_f.num1_E_led = SET;
+              
+                    g_DisplayLed.v_f.num1_C_led = SET;
+              
+                    g_DisplayLed.v_f.num1_D_led = SET;
+              
+                    g_DisplayLed.v_f.point_led = SET;
+              
+C51 COMPILER V9.60.7.0   PROJECT                                                           04/23/2024 20:16:28 PAGE 6   
+
+                    g_DisplayLed.v_f.num2_A_led = SET;
+              
+                    g_DisplayLed.v_f.num2_F_led = SET;
+              
+                    g_DisplayLed.v_f.num2_B_led = SET;
+              
+                    g_DisplayLed.v_f.num2_G_led = SET;
+              
+                    g_DisplayLed.v_f.num2_E_led = SET;
+              
+                    g_DisplayLed.v_f.num2_C_led = SET;
+              
+                    g_DisplayLed.v_f.num2_D_led = SET;
+              
+                    g_DisplayLed.v_f.temper_led = SET;
+              
+                    g_DisplayLed.v_f.process_led = SET;
+                    
+                    g_DisplayLed.v_f.time_led = SET;
+              
+                    g_DisplayLed.v_f.key_up_led = SET;
+              
+                    g_DisplayLed.v_f.key_down_led = SET;
+              
+                    g_DisplayLed.v_f.key_heat_led = SET;
+              
+                    g_DisplayLed.v_f.key_play_led = SET;
+              
+                    g_DisplayLed.v_f.hand_left_led = SET;
+                    
+                    g_DisplayLed.v_f.hand_right_led = SET;
+              
+              #endif
+ 331   3            
+ 332   3          }
+ 333   2      
+ 334   2      
+ 335   2          if (g_SysHardware.Time_500ms_cnt == 0) {
+ 336   3            g_SysHardware.Time_500ms_cnt  = 500;
+ 337   3      
+ 338   3            
+ 339   3            
+ 340   3          }
+ 341   2      
+ 342   2      
+ 343   2          
+ 344   2      
+ 345   2          if (g_SysHardware.Time_1000ms_cnt == 0) {
+ 346   3            g_SysHardware.Time_1000ms_cnt = 1000;
+ 347   3      
+ 348   3      #if(0)    
+                    g_View.PowerOn = ~g_View.PowerOn;
+                    if(g_View.PowerOn){
+                      SET_PB6_H;
+                    }else{
+                      SET_PB6_L;
+                    }
+              
+                    
+              #endif
+ 358   3            g_View.Flash =~g_View.Flash;
+ 359   3      
+C51 COMPILER V9.60.7.0   PROJECT                                                           04/23/2024 20:16:28 PAGE 7   
+
+ 360   3      
+ 361   3      #if(0)
+                    if(g_View.SendingState){
+                      g_View.SendingState = CLE;
+                        
+                      UART1_BUF = 0x5A;       
+                    }
+              #endif
+ 368   3            CmdSend1sLoop();
+ 369   3            
+ 370   3          }
+ 371   2          
+ 372   2        }
+ 373   1      
+ 374   1      }
+ 375          
+ 376          #endif
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

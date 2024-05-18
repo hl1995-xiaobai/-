@@ -1,0 +1,1 @@
+"Hardware\Key_Function.c" LARGE OMF2 OPTIMIZE (3,SPEED) BROWSE INCDIR(.\Application_Library;.\BF7615BMXX_XXXX_Library;.\Code;.\Project;.\Hardware) DEBUG PRINT(.\List\Key_Function.lst) TABS (2) OBJECT(.\Output\Key_Function.obj)
